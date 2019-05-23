@@ -28,11 +28,11 @@
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="#home" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-home w3-large"></i>
     <p>HOME</p>
   </a>
-  <a href="#home" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
   </a>
@@ -69,6 +69,7 @@
     <br>
     <h1 class="w3-jumbo"><span class="w3-hide-small"></span> Welcome back!</h1>
     <img src="space.png" alt="space" class="w3-image" width="1002" height="1208">
+  
   </header>
 
 <!-- END PAGE CONTENT -->
