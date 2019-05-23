@@ -93,9 +93,9 @@
      <div class="relative fullwidth col-xs-12">
       	<form action="creatclass.php" method="post">
 		<fieldset>
-		    <legend><h4>Add Student Profile</h4></legend> <br>
+		    <legend><h4>Update Student Profile</h4></legend> <br>
 			<div class="w3-center"> First Name  <input type="text" name="fname"> </div> 
-			<div class="w3-center" > Last Name  <input type="text" name="lname"></div> <br>
+			<div class="w3-center"> Last Name  <input type="text" name="lname"></div> <br>
 			<input type="hidden" name="size" value="1000000">
                 <div>
                   <input type="file" name="image">
