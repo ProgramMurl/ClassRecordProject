@@ -150,11 +150,11 @@
         <h2><span>Student Options</span><br>___________________________</h2>
         <button id="astudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addstudent.php';">Add Student Profile</button> 
         <br>
-        <button id="ustudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Update Student Profile</button> 
+        <button id="ustudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updatestudent.php';">Update Student Profile</button> 
         <br>
-        <button id="sstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Search Student Profile</button>
+        <button id="sstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'searchstudent.php';">Search Student Profile</button>
         <br>
-        <button id="dstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Student Profile</button>
+        <button id="dstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deletestudent.php';">Delete Student Profile </button>
       </fieldset>
     </div>
   </header>
