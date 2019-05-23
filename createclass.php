@@ -94,9 +94,9 @@
       	<form action="creatclass.php" method="post">
 		<fieldset>
 		    <legend><h4>Create Class</h4></legend> <br>
-			<div class="w3-center"> Course name:  <input type="text" name="cname"> </div> 
-			<div class="w3-center" > Course code:  <input type="text" name="ccode"></div> 
-			<div class="w3-center"> Teacher's Name:  <input type="text" name="tname"></div>
+			<div class="w3-center"> Course Name  <input type="text" name="cname"> </div> 
+			<div class="w3-center" > Course Code  <input type="text" name="ccode"></div> 
+			<div class="w3-center"> Teacher's Name  <input type="text" name="tname"></div>
 		</fieldset> <br>
 		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
 		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
