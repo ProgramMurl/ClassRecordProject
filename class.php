@@ -133,11 +133,11 @@
      <div class="relative fullwidth col-xs-12">
       <fieldset class="fieldset-auto-width">
         <h2><span>Class Options</span><br>___________________________</h2>
-        <button id="cclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'createclass.php';">Create Class</button> 
+        <button id="cclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'createclass.php';">Create Class</button>
         <br>
-        <button id="rclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Rename Class</button>
+        <button id="rclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updateclass.php';" >Rename Class</button>
         <br>
-        <button id="dclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Class</button>
+        <button id="dclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deleteclass.php';" >Delete Class</button>
       </fieldset>
     </div>
   </header>
@@ -148,7 +148,7 @@
     <div class="relative fullwidth col-xs-12">
       <fieldset class="fieldset-auto-width">
         <h2><span>Student Options</span><br>___________________________</h2>
-        <button id="astudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Student Profile</button> 
+        <button id="astudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addstudent.php';">Add Student Profile</button> 
         <br>
         <button id="ustudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Update Student Profile</button> 
         <br>
@@ -165,17 +165,11 @@
       <div class="relative fullwidth col-xs-12">
         <fieldset class="fieldset-auto-width">
           <h2><span>Requirement Options</span><br>___________________________</h2>
-          <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Exam</button> 
+          <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add (Exam/Quiz/Assignment)</button> 
           <br>
-          <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Exam</button> 
+          <button id="uebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Update (Exam/Quiz/Assignment)</button> 
           <br>
-          <button id="aabtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Assignment</button> 
-          <br>
-          <button id="dabtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Assignment</button> 
-          <br>
-          <button id="aqbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Quiz</button> 
-          <br>
-          <button id="dqbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Quiz</button> 
+          <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete (Exam/Quiz/Assignment)</button> 
         </fieldset>
       </div>
     </header>
