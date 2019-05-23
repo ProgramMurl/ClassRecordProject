@@ -113,17 +113,17 @@
       <div class="relative fullwidth col-xs-12">
         <fieldset class="fieldset-auto-width">
           <h2><span>Requirement Options</span><br>___________________________</h2>
-          <button class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Exam</button> 
+          <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Exam</button> 
           <br>
-          <button class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Exam</button> 
+          <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Exam</button> 
           <br>
-          <button class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Assignment</button> 
+          <button id="aabtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Assignment</button> 
           <br>
-          <button class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Assignment</button> 
+          <button id="dabtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Assignment</button> 
           <br>
-          <button class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Quiz</button> 
+          <button id="aqbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Add Quiz</button> 
           <br>
-          <button class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Quiz</button> 
+          <button id="dqbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete Quiz</button> 
         </fieldset>
       </div>
     </header>
