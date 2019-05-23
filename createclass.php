@@ -30,7 +30,7 @@
 		margin-top: 1em;
 	}
 	
-	input[type=text], input[type=date], input[type=tel], select, textarea {
+	input[type=text],input[type=number], input[type=date], input[type=tel], select, textarea {
 	  	width: 100%;
 	  	padding: 12px 20px;
 	  	margin: 8px 0;
@@ -91,12 +91,12 @@
   <!-- Header/Home -->  
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="creatclass.php" method="post">
+      	<form action="add_class.php" method="post">
 		<fieldset>
 		    <legend><h4>Create Class</h4></legend> <br>
-			<div class="w3-center"> Course Name  <input type="text" name="cname"> </div> 
-			<div class="w3-center" > Course Code  <input type="text" name="ccode"></div> 
-			<div class="w3-center"> Teacher's Name  <input type="text" name="tname"></div>
+			<div class="w3-center"> Course Name  <input type="text" name="cname" required></div> 
+			<div class="w3-center" > Course Code  <input type="number" name="ccode" required></div> 
+			<div class="w3-center"> Teacher's Name  <input type="text" name="tname" required></div>
 		</fieldset> <br>
 		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
 		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
@@ -110,11 +110,3 @@
 </body>
 </html>
 
-
-<?php
-//	include("config.php");
-//	session_start();
-
-
-
-?>
