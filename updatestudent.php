@@ -91,15 +91,17 @@
   <!-- Header/Home -->  
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="creatclass.php" method="post">
+      	<form action="updatestudent.php" method="post">
 		<fieldset>
 		    <legend><h4>Update Student Profile</h4></legend> <br>
-			<div class="w3-center"> First Name  <input type="text" name="fname"> </div> 
-			<div class="w3-center"> Last Name  <input type="text" name="lname"></div> <br>
-			<input type="hidden" name="size" value="1000000">
-                <div>
-                  <input type="file" name="image">
-                </div>
+        <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" > </div>
+  			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" > </div> 
+  			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" ></div>
+        <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" ></div><br>
+  			<input type="hidden" name="size" value="1000000">
+          <div>
+            <input type="file" name="image">
+          </div>
 		</fieldset> <br>
 		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
 		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 

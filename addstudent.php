@@ -91,19 +91,21 @@
   <!-- Header/Home -->  
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="creatclass.php" method="post">
-		<fieldset>
-		    <legend><h4>Add Student Profile</h4></legend> <br>
-			<div class="w3-center"> First Name  <input type="text" name="fname"> </div> 
-			<div class="w3-center" > Last Name  <input type="text" name="lname"></div> <br>
-			<input type="hidden" name="size" value="1000000">
+      	<form action="addstudent.php" method="post">
+      		<fieldset>
+      		    <legend><h4>Add Student Profile</h4></legend> <br>
+              <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div> 
+        			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"> </div> 
+        			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" placeholder="Last Name"></div> 
+              <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div><br>
+        			<input type="hidden" name="size" value="1000000">
                 <div>
                   <input type="file" name="image">
                 </div>
-		</fieldset> <br>
-		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
-		</form>
+      		</fieldset> <br>
+    		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
+    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
+    		</form>
     </div>
   </header>
 <!-- END PAGE CONTENT -->

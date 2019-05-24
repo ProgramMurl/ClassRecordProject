@@ -91,12 +91,12 @@
   <!-- Header/Home -->  
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="creatclass.php" method="post">
+      	<form action="createclass.php" method="post">
 		<fieldset>
 		    <legend><h4>Create Class</h4></legend> <br>
-			<div class="w3-center"> Course Name  <input type="text" name="cname"> </div> 
-			<div class="w3-center" > Course Code  <input type="text" name="ccode"></div> 
-			<div class="w3-center"> Teacher's Name  <input type="text" name="tname"></div>
+			<div class="w3-center"> Course Name  <input type="text" name="cname" required="required" placeholder="Course Name"> </div> 
+			<div class="w3-center" > Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div> 
+			<div class="w3-center"> Teacher's Name  <input type="text" name="tname" required="required" placeholder="Teacher's Name"></div>
 		</fieldset> <br>
 		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
 		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 

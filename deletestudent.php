@@ -91,11 +91,11 @@
   <!-- Header/Home -->  
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="creatclass.php" method="post">
+      	<form action="deletestudent.php" method="post">
 		<fieldset>
 		    <legend><h4>Delete Student Profile</h4></legend> <br>
-			<div class="w3-center"> Last Name  <input type="text" name="lname"></div> <br>
-      <div class="w3-center"> Class Name  <input type="text" name="cname"></div> <br>
+			<div class="w3-center"> Student ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div><br>
+      <div class="w3-center"> Course Code <input type="text" name="ccode" required="required" placeholder="Course Code"></div> <br>
 		</fieldset> <br>
 		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
 		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
