@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <style>
 	  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
@@ -86,25 +89,50 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <!-- Header/Home -->  
-  <header class="w3-container w3-padding-32 w3-center w3-black">
-     <div class="relative fullwidth col-xs-12">
-      	<?php 
-          include("config.php");
-          $result = $conn->query("SELECT * FROM subject") or die($conn->error);?>
+  <?php 
+    include("config.php");
+    $sql = "SELECT * FROM subject";
+    $result = $conn->query("SELECT * FROM subject") or die($conn->error);
 
-        <?php if($result->num_rows > 0 ): ?>
-          <?php while($row = $result->fetch_assoc()): ?>
-            <tr>
-              <td><?php echo $row["subject_code"]; ?></td>
-              <td><?php echo $row["subject_name"]; ?></td>
-              <td>
-                <a></a>
-              </td>
-            </tr>
-        <?php endwhile; ?>
+
+
+  ?>
+  <!-- Header/Home -->  
+  <div class="container">
+    <h2>Class</h2>                                                                                      
+    <div class="table-responsive">          
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Class Name</th>
+          <th>Class Code</th>
+          <th>Teacher ID</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+          <?php 
+            if ($result->num_rows >  0) {
+              while($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>".$row['subject_id']."</td>";
+                  echo "<td>".$row['subject_name']."</td>";
+                  echo "<td>".$row['subject_code']."</td>";
+                  echo "<td>".$row['teacher_id']."</td>";
+                  echo "<td><button class='btn btn-primary'><i class='fa fa-pencil' aria-hidden='true'></i></button></td>";
+                  echo "<td><button class='btn btn-danger'><i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
+              }
+            } else {
+                echo "0 results";
+            }
+            echo "</tr>";
+          ?>
+      </tbody>
+    </table>
     </div>
-  </header>
+  </div>
 <!-- END PAGE CONTENT -->
 </div>
 </body>
