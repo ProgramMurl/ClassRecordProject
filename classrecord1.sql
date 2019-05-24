@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2019 at 11:02 AM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: May 24, 2019 at 05:02 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -57,6 +57,7 @@ CREATE TABLE `requirement` (
 
 CREATE TABLE `student` (
   `student_id` int(11) NOT NULL,
+  `id_number` int(8) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
   `photo_filename` varchar(100) NOT NULL,
@@ -159,7 +160,7 @@ ALTER TABLE `student_record`
 --
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`subject_id`),
-  ADD UNIQUE KEY `teacher_id` (`teacher_id`);
+  ADD KEY `teacher_id` (`teacher_id`) USING BTREE;
 
 --
 -- Indexes for table `teacher`
