@@ -167,9 +167,9 @@
           <h2><span>Requirement Options</span><br>___________________________</h2>
           <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addrequirement.php';">Add (Exam/Quiz/Assignment)</button> 
           <br>
-          <button id="uebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Update (Exam/Quiz/Assignment)</button> 
+          <button id="uebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updaterequirement.php';">Update (Exam/Quiz/Assignment)</button> 
           <br>
-          <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" >Delete (Exam/Quiz/Assignment)</button> 
+          <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deleterequirement.php';">Delete (Exam/Quiz/Assignment)</button> 
         </fieldset>
       </div>
     </header>
