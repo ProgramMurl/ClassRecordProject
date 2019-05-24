@@ -91,7 +91,7 @@
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="createclass.php" method="post">
+      	<form action="add_class.php" method="post">
 		<fieldset>
 		    <legend><h4>Create Class</h4></legend> <br>
 			<div class="w3-center"> Course Name  <input type="text" name="cname" required="required" placeholder="Course Name"> </div>

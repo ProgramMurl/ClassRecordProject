@@ -7,9 +7,9 @@
 
   // -- TEST SECTION
   // test values, remove section in actual usage
-  $_POST['cname'] = 'Data Structures';
-  $_POST['ccode'] = 'CpE 123';
-  $_POST['tname'] = 'Pena';
+  // $_POST['cname'] = 'Data Structures';
+  // $_POST['ccode'] = 'CpE 123';
+  // $_POST['tname'] = 'Pena';
   // -- END OF TEST SECTION
 
   if(isset($_POST['cname']) && isset($_POST['ccode']) && isset($_POST['tname'])){
@@ -20,7 +20,7 @@
     $row = mysqli_fetch_array($teacher_result);
 
     $insert_class = "INSERT INTO subject (subject_name, subject_code, teacher_id) VALUES ('".$_POST['cname']."','".$_POST['ccode']."', ".$row[0].")";
-    echo mysqli_query($conn, $insert_class) ? "Class added successfully": "Failed to update database";
+    echo mysqli_query($conn, $insert_class) ? header("location: createclass.php") : "Failed to update database";
     // change true value of above ternary operation to redirect to previous class
   }
 ?>
