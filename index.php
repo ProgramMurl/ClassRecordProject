@@ -15,10 +15,18 @@ input[type=text], input[type=password] {
   border: 1px solid #ccc;
   box-sizing: border-box;
 }
+.bg-img {
+  background-image: url("blue.jpg");
+  min-height: 380px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
 
 /* Set a style for all buttons */
 button {
-  background-color: #4CAF50;
+  background-color: #004080;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -52,6 +60,7 @@ img.avatar {
 
 .container {
   padding: 16px;
+  max-width: 100%;
 }
 
 span.psw {
@@ -79,24 +88,12 @@ span.psw {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 520px; /* Could be more or less, depending on screen size */
+  height: 620px;
+  position: relative;
+  box-sizing: border-box;
 }
 
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
-}
 
 /* Add Zoom Animation */
 .animate {
@@ -127,7 +124,7 @@ span.psw {
 </style>
 </head>
 
-<body style="background-image: url(blue.jpg)">
+<body class="bg-img">
 
     <div class="modal">
      <h2>Login</h2>
@@ -155,16 +152,6 @@ span.psw {
          Not yet a member? <a href="">Sign up</a>
      </p>
     </form>
-    <script>
-    // Get the modal
-    var modal = document.getElementById('id01');
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-    </script>
+   
 </body>
 </html>
