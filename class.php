@@ -121,8 +121,11 @@
                   echo "<td>".$row['subject_name']."</td>";
                   echo "<td>".$row['subject_code']."</td>";
                   echo "<td>".$row['teacher_id']."</td>";
-                  echo "<td><button class='btn btn-primary'><i class='fa fa-pencil' aria-hidden='true'></i></button></td>";
-                  echo "<td><button class='btn btn-danger'><i class='fa fa-trash-o' aria-hidden='true'></i></button></td>";
+                  echo "<td>
+                        <button class='btn btn-primary' value=".$row['subject_id'].">
+                          <i class='fa fa-pencil' aria-hidden='true'></i>
+                        </button></td>";
+                  echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
               }
             } else {
                 echo "0 results";
