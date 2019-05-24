@@ -29,7 +29,7 @@
 	form div + div {
 		margin-top: 1em;
 	}
-	
+
 	input[type=text], input[type=date], input[type=tel], select, textarea {
 	  	width: 100%;
 	  	padding: 12px 20px;
@@ -88,18 +88,18 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <!-- Header/Home -->  
+  <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
       	<form action="createclass.php" method="post">
 		<fieldset>
 		    <legend><h4>Create Class</h4></legend> <br>
-			<div class="w3-center"> Course Name  <input type="text" name="cname" required="required" placeholder="Course Name"> </div> 
-			<div class="w3-center" > Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div> 
-			<div class="w3-center"> Teacher's Name  <input type="text" name="tname" required="required" placeholder="Teacher's Name"></div>
+			<div class="w3-center"> Course Name  <input type="text" name="cname" required="required" placeholder="Course Name"> </div>
+			<div class="w3-center" > Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div>
+			<div class="w3-center"> Teacher's Name  <input type="text" name="tname" required="required" placeholder="Teacher's Surname"></div>
 		</fieldset> <br>
 		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
+		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button>
 		</form>
     </div>
   </header>

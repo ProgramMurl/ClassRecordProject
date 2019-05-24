@@ -7,13 +7,13 @@
 
   // -- TEST SECTION
   // test values, remove section in actual usage
-  $_POST['username'] = "user8";
+  $_POST['username'] = "user1";
   $_POST['password'] = "password";
   $_POST['email'] = "user@email.com";
-  $_POST['usertype'] = "student";
+  $_POST['usertype'] = "teacher";
 
-  $_POST['firstname'] = "Bob";
-  $_POST['lastname'] = "Ong";
+  $_POST['firstname'] = "Christine";
+  $_POST['lastname'] = "Pena";
   // -- END OF TEST SECTION
 
   if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['usertype'])){
