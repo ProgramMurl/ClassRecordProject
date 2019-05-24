@@ -149,7 +149,7 @@ span.psw {
      </div>
      <div class="container"style="background-color:#f1f1f1">
      <p>
-         Not yet a member? <a href="">Sign up</a>
+         Not yet a member? <a href="add_user.php">Sign up</a>
      </p>
     </form>
    
