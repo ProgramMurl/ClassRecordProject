@@ -137,7 +137,7 @@
         <br>
         <button id="rclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updateclass.php';" >Rename Class</button>
         <br>
-        <button id="dclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deleteclass.php';" >Delete Class</button>
+        <button id="dclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';" >Delete Class</button>
       </fieldset>
     </div>
   </header>
