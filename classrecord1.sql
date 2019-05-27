@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 24, 2019 at 05:02 PM
+-- Generation Time: May 27, 2019 at 06:26 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -45,6 +45,7 @@ CREATE TABLE `requirement` (
   `requirement_id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
+  `id_number` int(8) NOT NULL,
   `requirement_type` varchar(100) NOT NULL,
   `grade` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -60,9 +61,19 @@ CREATE TABLE `student` (
   `id_number` int(8) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `photo_filename` varchar(100) NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `grade` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_id`, `id_number`, `first_name`, `last_name`, `image`, `grade`, `user_id`) VALUES
+(25, 12013659, 'Martha', 'Smith', 'images/girl2.jpg', 0, 0),
+(26, 16024985, 'Sam', 'Stone', 'images/noavatar.png', 0, 0),
+(27, 15109857, 'Diane', 'Samson', 'images/pink.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -85,9 +96,18 @@ CREATE TABLE `student_record` (
 CREATE TABLE `subject` (
   `subject_id` int(11) NOT NULL,
   `subject_name` varchar(100) NOT NULL,
-  `subject_code` int(100) NOT NULL,
+  `subject_code` varchar(30) NOT NULL,
   `teacher_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`subject_id`, `subject_name`, `subject_code`, `teacher_id`) VALUES
+(15, 'Web Development', 'cpe75n', 1),
+(16, 'CISCO1', 'cpe73n', 1),
+(17, 'Data Structures', 'cpe324n', 1);
 
 -- --------------------------------------------------------
 
@@ -101,6 +121,13 @@ CREATE TABLE `teacher` (
   `last_name` varchar(100) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `teacher`
+--
+
+INSERT INTO `teacher` (`teacher_id`, `first_name`, `last_name`, `user_id`) VALUES
+(1, 'Darwin', 'Lee', 4);
 
 -- --------------------------------------------------------
 
@@ -121,7 +148,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `usertype`) VALUES
-(1, 'tadmin', 'tadmin@school.com', '1234', '');
+(1, 'tadmin', 'tadmin@school.com', '1234', 'teacher'),
+(4, 'teach1', 'iteach@email.com', 'teacher', 'teacher');
 
 --
 -- Indexes for dumped tables
@@ -145,8 +173,7 @@ ALTER TABLE `requirement`
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`student_id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD PRIMARY KEY (`student_id`) USING BTREE;
 
 --
 -- Indexes for table `student_record`
@@ -183,31 +210,31 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `requirement`
 --
 ALTER TABLE `requirement`
-  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
