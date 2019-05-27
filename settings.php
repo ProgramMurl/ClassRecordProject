@@ -100,10 +100,6 @@
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
   </a>
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-eye w3-large"></i>
-    <p>PHOTOS</p>
-  </a>
   <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-cog w3-large"></i>
     <p>SETTINGS</p>
@@ -150,8 +146,6 @@
         <h2><span>Student Options</span><br>___________________________</h2>
         <button id="astudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addstudent.php';">Add Student Profile</button> 
         <br>
-        <button id="ustudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updatestudent.php';">Update Student Profile</button> 
-        <br>
         <button id="sstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'searchstudent.php';">Search Student Profile</button>
         <br>
         <button id="dstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deletestudent.php';">Delete Student Profile </button>
@@ -165,9 +159,9 @@
       <div class="relative fullwidth col-xs-12">
         <fieldset class="fieldset-auto-width">
           <h2><span>Requirement Options</span><br>___________________________</h2>
-          <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addrequirement.php';">Add (Exam/Quiz/Assignment)</button> 
+          <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addrequirement.php';">Add (Exam/Quiz/Assignment)</button><!--  
           <br>
-          <button id="uebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updaterequirement.php';">Update (Exam/Quiz/Assignment)</button> 
+          <button id="uebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updaterequirement.php';">Update (Exam/Quiz/Assignment)</button>  -->
           <br>
           <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deleterequirement.php';">Delete (Exam/Quiz/Assignment)</button> 
         </fieldset>

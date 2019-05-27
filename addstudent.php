@@ -14,7 +14,7 @@
 
 
   <style>
-	  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+	  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif; color: white;}
 	  form {
 		/* Just to center the form on the page */
 		margin: 0 auto;
@@ -56,15 +56,11 @@
     <i class="fa fa-home w3-large"></i>
     <p>HOME</p>
   </a>
-  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
   </a>
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-eye w3-large"></i>
-    <p>PHOTOS</p>
-  </a>
-  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-cog w3-large"></i>
     <p>SETTINGS</p>
   </a>
@@ -79,7 +75,6 @@
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
     <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="class.php" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
-    <a href="" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
     <a href="settings.php" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
     <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
     LOGOUT</a>
@@ -91,20 +86,27 @@
   <!-- Header/Home -->  
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="addstudent.php" method="post">
+      	<form action="addstudent.php" method="post" enctype="multipart/form-data">
       		<fieldset>
-      		    <legend><h4>Add Student Profile</h4></legend> <br>
-              <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div> 
-        			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"> </div> 
-        			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" placeholder="Last Name"></div> 
-              <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div><br>
-        			<input type="hidden" name="size" value="1000000">
-                <div>
-                  <input type="file" name="image">
-                </div>
+            <?php 
+              $text=" ";
+              $first=""; 
+              $last="";
+              $idno=0;
+              $course="";
+            ?>
+    		    <legend><h4>Add Student Profile</h4></legend> <br>
+            <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div> 
+      			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"> </div> 
+      			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" placeholder="Last Name"></div> 
+            <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div><br>
+      			<input type="hidden" name="size" value="1000000">
+              <div>
+                <input type="file" name="image">
+              </div>
       		</fieldset> <br>
-    		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
+    		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
+    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
     		</form>
     </div>
   </header>
@@ -117,9 +119,63 @@
 
 
 <?php
-//	include("config.php");
-//	session_start();
 
+  $target_dir = "images/";
 
+  if(isset($_POST['submit']) && !empty($_FILES["image"]["name"])){
+        $first=$_POST['fname']; 
+        $last=$_POST['lname'] ;
+        $idno= $_POST['idnum'];
+        $course=$_POST['ccode'];
+        $file_name = basename($_FILES['image']['name']);
+        $file_tmp_name = $_FILES['image']['tmp_name'];
+        $temp = $target_dir."".$file_name;
+        $file_type = pathinfo($temp,PATHINFO_EXTENSION);
+         // Allow certain file formats
+        $allowTypes = array('jpg','png','jpeg','gif','pdf');
 
+        if(in_array($file_type, $allowTypes)){
+          if(move_uploaded_file($file_tmp_name,$target_dir.$file_name)){
+              $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
+              $sql = "INSERT INTO student (id_number,first_name,last_name,image) VALUES ('$idno','$first', '$last','$temp')";
+               $result = mysqli_query($conn,$sql);
+              //echo "<p align=center>$temp</p>";
+              //echo "<p align=center>$result</p>";
+
+            if(mysqli_affected_rows($conn) == 1){
+              echo "<p align=center style='color:green'><b>File has been successfully uploaded</b></p>";
+            }
+            else{
+              echo "<p align=center>A system error has occured</p>".mysqli_error($conn);
+            }
+          }
+          else 
+            $text = "Sorry, there was an error uploading your file.";
+        }
+        else 
+          $text = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+  }
+  else
+    $text = 'Please select a file to upload.';
+  echo "<p align=center>$text</p>";
+  
+//     $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
+//     $idstud  = "SELECT * FROM subject";
+//     $ans = $conn->query("SELECT * FROM subject") or die($conn->error);
+//     $idsub = "SELECT * FROM student";
+//     $ans1 = $conn->query("SELECT * FROM teacher") or die($conn->error);
+//     $r = $ans1->fetch_assoc();
+ 
+//  while($s = $ans->fetch_assoc()){
+
+//   $rec = "INSERT INTO student_record (student_id, subject_id, final grade) VALUES (".$r['student_id'].", ".$s['subject_id'].", '0')";
+
+//   $results = mysqli_query($conn,$rec);
+//   if(mysqli_affected_rows($conn) == 1){
+//     echo "<p align=center style='color:orange'><b>Added to record</b></p>";
+//   }
+//   else{
+//     echo "<p align=center>Error has occured</p>".mysqli_error($conn);
+//   }
+// }
 ?>

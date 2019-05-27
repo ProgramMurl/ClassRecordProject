@@ -56,15 +56,11 @@
     <i class="fa fa-home w3-large"></i>
     <p>HOME</p>
   </a>
-  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
   </a>
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-eye w3-large"></i>
-    <p>PHOTOS</p>
-  </a>
-  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-cog w3-large"></i>
     <p>SETTINGS</p>
   </a>
@@ -79,13 +75,11 @@
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
     <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="class.php" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
-    <a href="" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
     <a href="settings.php" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
     <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
     LOGOUT</a>
   </div>
 </div>
-
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->  
@@ -96,11 +90,10 @@
               <legend><h4>Rename Class</h4></legend> <br>
                 <div class="w3-center"> Old Course Name  <input type="text" name="oname" required="required" placeholder="Old Course Name"> </div> 
                 <div class="w3-center"> New Course Name  <input type="text" name="cname" required="required" placeholder="New Course Name"></div>
-                <div class="w3-center"> New Course Code  <input type="text" name="ccode" required="required" placeholder="New Course Code"></div> 
-                <div class="w3-center"> Teacher's Name   <input type="text" name="tname" required="required" placeholder="Teacher's Name"></div>
+                <div class="w3-center"> New Course Code  <input type="text" name="ccode" required="required" placeholder="New Course Code"></div>
           </fieldset> <br>
-          <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
+          <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
+          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
         </form>
     </div>
   </header>
@@ -113,9 +106,23 @@
 
 
 <?php
-//  include("config.php");
-//  session_start();
+  include("config.php");
+  $sql = "SELECT * FROM subject";
+  $result = $conn->query("SELECT * FROM subject") or die($conn->error);
+  
+  // -- TEST SECTION
+  // test values, remove section in actual usage
+  // $_POST['cname'] = 'Data Structures';
+  // $_POST['ccode'] = 'CpE 123';
+  // $_POST['tname'] = 'Pena';
+  // -- END OF TEST SECTION
+  if(isset($_POST['oname']) && isset($_POST['cname']) && isset($_POST['ccode'])){
+    $old =$_POST['oname'];
+    $course = $_POST['cname'];
+    $code = $_POST['ccode'];
 
-
-
+    $update_class = "UPDATE subject SET subject_name='$course', subject_code='$code' WHERE subject_name ='$old'";
+    echo mysqli_query($conn, $update_class) ? header("location: class.php") : "Failed to update database";
+    // change true value of above ternary operation to redirect to previous class
+  }
 ?>

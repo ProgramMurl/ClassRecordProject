@@ -56,15 +56,11 @@
     <i class="fa fa-home w3-large"></i>
     <p>HOME</p>
   </a>
-  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
   </a>
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-eye w3-large"></i>
-    <p>PHOTOS</p>
-  </a>
-  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-cog w3-large"></i>
     <p>SETTINGS</p>
   </a>
@@ -73,12 +69,12 @@
     <p>LOGOUT</p>
   </a>
 </nav>
+
 <!--  Navbar on small screens (Hidden on medium and large screens)  -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
     <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="class.php" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
-    <a href="" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
     <a href="settings.php" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
     <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
     LOGOUT</a>
@@ -101,10 +97,12 @@
               </select><br><br>
               <div class="w3-center"> Student ID number  <input type="text" name="idnum" required="required" placeholder="Student ID number"> </div> 
               <div class="w3-center"> Requirement Number  <input type="text" name="rnum" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div> 
+              <div class="w3-center">Course Code <input type="text" name="ccode" required="required" placeholder="Course Code"> </div> 
               <div class="w3-center"> Highest Possible Score <input type="text" name="hps" required="required" placeholder="Highest Possible Score"></div> 
+              <div class="w3-center"> Student Score <input type="text" name="score" required="required" placeholder="Student Score"></div> 
           </fieldset> <br>
-      		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
+      		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
+      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
     		</form>
     </div>
   </header>
@@ -117,9 +115,82 @@
 
 
 <?php
-//	include("config.php");
-//	session_start();
 
+$idnum=$quiz=$exam=$ass=$hps=$rnum=$score=0;
+$cc="";
 
+  $servername = "localhost";
+  $username ="root";
+  $password = "";
+  $Dname = "classrecord1";
 
+  $conn = new mysqli($servername, $username, $password, $Dname);
+
+  if($conn->connect_error){
+    die("Connection failed: ". $conn->connect_error);
+  }
+
+if(isset($_POST['submit'])){
+  $idnum = $_POST['idnum'];
+  $score = $_POST['score'];
+  $rnum = $_POST['rnum'];
+  $hps= $_POST['hps'];
+  $cc = $_POST['ccode'];
+
+  foreach ($_POST['Select'] as $select) {
+  if ($select == "quiz") {
+      $sql="SELECT * FROM $select WHERE id_number='$idnum'AND course_code='$cc' AND ass_num='$rnum'";
+      $result1 = mysqli_query($conn,$sql);
+      if(mysqli_num_rows($result1)>0){
+          echo "<p align=center>Duplicate found</p>";
+      }
+      else{
+
+        $sql = "INSERT INTO $select (id_number,quiz_num, course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."', '$hps','$score')";
+          if($conn->query($sql)===TRUE){
+            die("</br> New Record created successfully");
+          }
+          else{
+            echo "Error: ". $sql. "<br>".$conn->error;
+          }
+      }
+
+    }
+    elseif ($select == "exam") {
+      $sql="SELECT * FROM $select WHERE id_number='$idnum'AND course_code='$cc' AND ass_num='$rnum'";
+      $result1 = mysqli_query($conn,$sql);
+      if(mysqli_num_rows($result1)>0){
+          echo "<p align=center>Duplicate found</p>";
+      }
+      else{
+
+        $sql = "INSERT INTO $select ( id_number,exam_num, course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."', '$hps','$score')";
+          if($conn->query($sql)===TRUE){
+            die("</br> New Record created successfully");
+          }
+          else{
+            echo "Error: ". $sql. "<br>".$conn->error;
+          }
+      }
+    }
+    elseif ($select == "assignment") {
+      $sql="SELECT * FROM $select WHERE id_number='$idnum' AND course_code='$cc' AND ass_num='$rnum'";
+      $result1 = mysqli_query($conn,$sql);
+      if(mysqli_num_rows($result1)>0){
+          echo "<p align=center>Duplicate found</p>";
+      }
+      else{
+
+        $sql = "INSERT INTO $select ( id_number,ass_num,course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."','$hps','$score')";
+          if($conn->query($sql)===TRUE){
+            die("</br> <center> New Record created successfully</center>");
+          }
+          else{
+            echo "Error: ". $sql. "<br>".$conn->error;
+          }
+      }
+    }
+  }
+  
+}
 ?>

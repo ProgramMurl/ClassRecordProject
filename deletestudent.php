@@ -96,8 +96,8 @@
 			<div class="w3-center"> Student ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div><br>
       <div class="w3-center"> Course Code <input type="text" name="ccode" required="required" placeholder="Course Code"></div> <br>
 		</fieldset> <br>
-		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
+		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit"onClick="return confirm('Are you sure?')">
+		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
 		</form>
     </div>
   </header>
@@ -110,9 +110,19 @@
 
 
 <?php
-//	include("config.php");
-//	session_start();
+$idnum = 0;
+$cc = "";
 
+if(isset($_POST['submit'])){
+  $idnum = $_POST['idnum'];
+	include("config.php");
+  $sql = "DELETE FROM student WHERE id_number='$idnum'";
 
-
+  if($conn->query($sql)===TRUE){
+    echo "<p align=center>Deleted successfully</p>";
+  }
+  else{
+    echo "Error: " ,$sql . "<br>" . $conn->error;
+  }
+}
 ?>

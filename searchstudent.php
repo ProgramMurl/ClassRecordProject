@@ -56,15 +56,11 @@
     <i class="fa fa-home w3-large"></i>
     <p>HOME</p>
   </a>
-  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
   </a>
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-eye w3-large"></i>
-    <p>PHOTOS</p>
-  </a>
-  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-cog w3-large"></i>
     <p>SETTINGS</p>
   </a>
@@ -73,6 +69,17 @@
     <p>LOGOUT</p>
   </a>
 </nav>
+
+<!--  Navbar on small screens (Hidden on medium and large screens)  -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+  <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+    <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="class.php" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
+    <a href="settings.php" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
+    <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
+    LOGOUT</a>
+  </div>
+</div>
 <!--  Navbar on small screens (Hidden on medium and large screens)  -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
@@ -95,10 +102,10 @@
       		    <legend><h4>Search Student Profile</h4></legend> <br>
         			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"></div> 
               <div class="w3-center"> Last Name   <input type="text" name="lname" required="required" placeholder="Last Name" ></div> <br>
-              <div class="w3-center"> Course Name  <input type="text" name="cname" required="required" placeholder="Course Name"></div> <br>
+              <div class="w3-center"> Student ID number  <input type="text" name="idnum" required="required" placeholder="Student ID number"> </div> 
       		</fieldset> <br>
-      		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
+      		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
+      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
     		</form>
     </div>
   </header>
@@ -111,9 +118,25 @@
 
 
 <?php
-//	include("config.php");
-//	session_start();
+	include("config.php");
 
+  $idnum = 0;
+  if(isset($_POST['submit'])){
+  $idnum = $_POST['idnum'];
+  $sql="SELECT * FROM Student  
+         WHERE id_number = $idnum ";
 
+  $result1 = $conn->query($sql);
+
+  if(!$result1){
+      
+      printf("Error: ".mysqli_error($conn));
+      exit();
+   }
+   while($row = mysqli_fetch_array($result1)){
+      echo "<br/> <center> Student ID: ".$row["id_number"]." Student Name: ".$row["first_name"]." ".$row["last_name"]."</center>";
+      echo "<img src ='".$row['image']."' align='center' max-width='50%'>";
+   }
+}
 
 ?>

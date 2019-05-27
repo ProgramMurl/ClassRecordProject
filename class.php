@@ -16,39 +16,38 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <style>
-	  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-	  form {
-		/* Just to center the form on the page */
-		margin: 0 auto;
-		width: 400px;
-		/* To see the outline of the form */
-		padding: 1em;
-		border: 1px solid #CCC;
-		border-radius: 1em;
-		display: inline-block;
-		}
-
-	form div + div {
-		margin-top: 1em;
-	}
-	
-	input[type=text], input[type=date], input[type=tel], select, textarea {
-	  	width: 100%;
-	  	padding: 12px 20px;
-	  	margin: 8px 0;
-	  	display: inline-block;
-	  	border: 1px solid #ccc;
-	  	border-radius: 4px;
-	  	box-sizing: border-box;
-		}
-	  .w3-row-padding img {margin-bottom: 12px}
-	  /* Set the width of the sidebar to 120px */
-	  .w3-sidebar {width: 100px;background: #222;}
-	  /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-	  #main {margin-left: 120px}
-	  /* Remove margins from "page content" on small screens */
-	  @media only screen and (max-width: 600px) {#main {margin-left: 0}}
-	  </style>
+    body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+    form {
+    /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 400px;
+    /* To see the outline of the form */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    display: inline-block;
+    }
+  form div + div {
+    margin-top: 1em;
+  }
+  
+  input[type=text], input[type=date], input[type=tel], select, textarea {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .w3-row-padding img {margin-bottom: 12px}
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar {width: 100px;background: #222;}
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    #main {margin-left: 120px}
+    /* Remove margins from "page content" on small screens */
+    @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+    </style>
 <body class="w3-black">
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
@@ -60,10 +59,6 @@
   <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
-  </a>
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-hover-black">
-    <i class="fa fa-eye w3-large"></i>
-    <p>PHOTOS</p>
   </a>
   <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-cog w3-large"></i>
@@ -80,7 +75,6 @@
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
     <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="class.php" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
-    <a href="" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
     <a href="settings.php" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
     <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
     LOGOUT</a>
@@ -93,10 +87,11 @@
     include("config.php");
     $sql = "SELECT * FROM subject";
     $result = $conn->query("SELECT * FROM subject") or die($conn->error);
-
-
-
+    $sql1 = "SELECT * FROM teacher";
+    $result1 = $conn->query("SELECT * FROM teacher") or die($conn->error);
+    $row1 = $result1->fetch_assoc();
   ?>
+
   <!-- Header/Home -->  
   <div class="container">
     <h2>Class</h2>                                                                                      
@@ -104,11 +99,11 @@
     <table class="table">
       <thead>
         <tr>
-          <th>#</th>
           <th>Class Name</th>
           <th>Class Code</th>
           <th>Teacher ID</th>
-          <th>Edit</th>
+          <th>Teacher's Surname</th>
+          <!-- <th>View</th> -->
           <th>Delete</th>
         </tr>
       </thead>
@@ -117,17 +112,19 @@
             if ($result->num_rows >  0) {
               while($row = $result->fetch_assoc()) {
                   echo "<tr>";
-                  echo "<td>".$row['subject_id']."</td>";
                   echo "<td>".$row['subject_name']."</td>";
                   echo "<td>".$row['subject_code']."</td>";
                   echo "<td>".$row['teacher_id']."</td>";
-                  echo "<td>
-                        <button class='btn btn-primary' value=".$row['subject_id'].">
-                          <i class='fa fa-pencil' aria-hidden='true'></i>
-                        </button></td>";
+                  echo "<td>".$row1['last_name']."</td>";
+                  //echo "<td><a href='settings.php?id=".$row['subject_id']."'>
+                   //     <button class='btn btn-primary' value=".$row['subject_id'].">
+                   //       <i class='fa fa-eye' aria-hidden='true'></i>
+                   //     </button></a></td>";
                   echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
               }
-            } else {
+              
+            }
+            else {
                 echo "0 results";
             }
             echo "</tr>";

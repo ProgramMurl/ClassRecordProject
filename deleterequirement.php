@@ -14,39 +14,39 @@
 
 
   <style>
-	  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-	  form {
-		/* Just to center the form on the page */
-		margin: 0 auto;
-		width: 400px;
-		/* To see the outline of the form */
-		padding: 1em;
-		border: 1px solid #CCC;
-		border-radius: 1em;
-		display: inline-block;
-		}
+    body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+    form {
+    /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 400px;
+    /* To see the outline of the form */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    display: inline-block;
+    }
 
-	form div + div {
-		margin-top: 1em;
-	}
-	
-	input[type=text], input[type=date], input[type=tel], select, textarea {
-	  	width: 100%;
-	  	padding: 12px 20px;
-	  	margin: 8px 0;
-	  	display: inline-block;
-	  	border: 1px solid #ccc;
-	  	border-radius: 4px;
-	  	box-sizing: border-box;
-		}
-	  .w3-row-padding img {margin-bottom: 12px}
-	  /* Set the width of the sidebar to 120px */
-	  .w3-sidebar {width: 100px;background: #222;}
-	  /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-	  #main {margin-left: 120px}
-	  /* Remove margins from "page content" on small screens */
-	  @media only screen and (max-width: 600px) {#main {margin-left: 0}}
-	  </style>
+  form div + div {
+    margin-top: 1em;
+  }
+  
+  input[type=text], input[type=date], input[type=tel], select, textarea {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .w3-row-padding img {margin-bottom: 12px}
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar {width: 100px;background: #222;}
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    #main {margin-left: 120px}
+    /* Remove margins from "page content" on small screens */
+    @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+    </style>
 
 <body class="w3-black">
 
@@ -56,15 +56,11 @@
     <i class="fa fa-home w3-large"></i>
     <p>HOME</p>
   </a>
-  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="class.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
   </a>
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-eye w3-large"></i>
-    <p>PHOTOS</p>
-  </a>
-  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-black">
+  <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-cog w3-large"></i>
     <p>SETTINGS</p>
   </a>
@@ -77,10 +73,9 @@
 <!--  Navbar on small screens (Hidden on medium and large screens)  -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="welcome.php" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="class.php" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
-    <a href="" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
-    <a href="" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
+    <a href="settings.php" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
     <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
     LOGOUT</a>
   </div>
@@ -91,21 +86,22 @@
   <!-- Header/Home -->  
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="deleterequirement.php" method="post">
+        <form action="deleterequirement.php" method="post">
           <fieldset>
-      		 <legend><h4>Delete Requirement</h4></legend> 
+           <legend><h4>Delete Requirement</h4></legend> 
            <label>Select the category</label>
-            <select name="Select[]" > 
+            <select name="Select[]" >
               <option value="quiz">Quiz</option>
               <option value="exam">Exam</option>
               <option value="ass">Assignment</option>
               </select><br><br>
-              <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"> </div> 
+              <div class="w3-center"> Student ID number  <input type="text" name="idnum" required="required" placeholder="Student ID number"> </div> 
               <div class="w3-center"> Requirement Number  <input type="text" name="rnum" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div> 
+              <div class="w3-center">Course Code <input type="text" name="ccode" required="required" placeholder="Course Code"> </div> 
           </fieldset> <br>
-      		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
-    		</form>
+          <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
+          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
+        </form>
     </div>
   </header>
 <!-- END PAGE CONTENT -->
@@ -117,9 +113,55 @@
 
 
 <?php
-//	include("config.php");
-//	session_start();
 
+$idnum=$quiz=$exam=$ass=$hps=$rnum=$score=0;
+$cc="";
 
+  $servername = "localhost";
+  $username ="root";
+  $password = "";
+  $Dname = "classrecord1";
 
+  $conn = new mysqli($servername, $username, $password, $Dname);
+
+  if($conn->connect_error){
+    die("Connection failed: ". $conn->connect_error);
+  }
+
+if(isset($_POST['submit'])){
+  $idnum = $_POST['idnum'];
+  $score = $_POST['score'];
+  $rnum = $_POST['rnum'];
+
+  foreach ($_POST['Select'] as $select) {
+  if ($select == "quiz") {
+      $sql = "DELETE FROM $select WHERE id_number='$idnum' AND quiz_num='$rnum'AND course_code='$cc'";
+         if($conn->query($sql)===TRUE){
+              echo "<p align=center>Deleted successfully</p>";
+          }
+          else{
+            echo "Error: " ,$sql . "<br>" . $conn->error;
+          }
+    }
+    elseif ($select == "exam") {
+      $sql = "DELETE FROM $select WHERE id_number='$idnum' AND exam_num='$rnum' AND course_code='$cc'";
+         if($conn->query($sql)===TRUE){
+            
+          }
+          else{
+            echo "Error: " ,$sql . "<br>" . $conn->error;
+          }
+      }
+    elseif ($select == "assignment") {
+      $sql = "DELETE FROM $select WHERE id_number='$idnum' AND ass_num='$rnum' AND course_code='$cc'";
+       if($conn->query($sql)===TRUE){
+          echo "<p align=center>Deleted successfully</p>";
+        }
+        else{
+          echo "Error: " ,$sql . "<br>" . $conn->error;
+        }
+      
+    }
+  }
+}
 ?>
