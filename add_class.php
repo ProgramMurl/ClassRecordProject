@@ -20,7 +20,7 @@
     $row = mysqli_fetch_array($teacher_result);
 
     $insert_class = "INSERT INTO subject (subject_name, subject_code, teacher_id) VALUES ('".$_POST['cname']."','".$_POST['ccode']."', ".$row[0].")";
-    echo mysqli_query($conn, $insert_class) ? header("location: createclass.php") : "Failed to update database";
+    echo mysqli_query($conn, $insert_class) ? header("location: class.php") : "Failed to update database";
     // change true value of above ternary operation to redirect to previous class
   }
 ?>

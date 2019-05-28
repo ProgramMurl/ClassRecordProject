@@ -92,7 +92,7 @@
   <?php 
     include("config.php");
     $sql = "SELECT * FROM subject";
-    $result = $conn->query("SELECT * FROM subject JOIN teacher on subject.teacher_id = teacher.teacher_id JOIN users on teacher.user_id = users.id") or die($conn->error);
+    $result = $conn->query("SELECT * FROM subject JOIN teacher on subject.teacher_id = teacher.teacher_id") or die($conn->error);
     // $sql1 = "SELECT * FROM teacher";
     // $result1 = $conn->query("SELECT * FROM users WHERE usertype = 'teacher' ") or die($conn->error);
     // $row1 = $result1->fetch_assoc();
@@ -102,7 +102,7 @@
   <!-- Header/Home -->  
   <div class="container">
     <h2>Class</h2>
-    <a href='add_class.php'><button id="add" class="btn btn-primary">Add Class</button></a>
+    <a href='createclass.php'><button id="add" class="btn btn-primary">Add Class</button></a>
     <div class="table-responsive">          
     <table class="table">
       <thead>
@@ -125,10 +125,10 @@
                   echo "<td>".$row['subject_code']."</td>";
                   echo "<td>".$row['teacher_id']."</td>";
                   echo "<td>".$row['first_name']. " " .$row['last_name']."</td>";
-                  echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
+                  echo "<td>
                        <button class='btn btn-success' value=".$row['subject_id'].">
                          <i class='fa fa-eye' aria-hidden='true'></i>
-                       </button></a></td>";
+                       </button></td>";
                   echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
                        <button class='btn btn-warning' value=".$row['subject_id'].">
                          <i class='fa fa-pencil' aria-hidden='true'></i>

@@ -19,7 +19,7 @@
       if($result->num_rows > 0){
         while($row=$result->fetch_assoc()){
           $_SESSION['active_user_username'] = $row['username'];
-          $_SESSION['active_user_id'] = $row['id'];
+          $_SESSION['active_user_id'] = $row['teacher_id'];
           header('location: welcome.php');
         }
       }else{
