@@ -30,6 +30,12 @@
   form div + div {
     margin-top: 1em;
   }
+  #add{
+    margin-left: 70em;
+    margin-bottom: 2em;
+    margin-top:-3em;
+    position: absolute
+  }
   
   input[type=text], input[type=date], input[type=tel], select, textarea {
       width: 100%;
@@ -95,7 +101,8 @@
 
   <!-- Header/Home -->  
   <div class="container">
-    <h2>Class</h2>                                                                                      
+    <h2>Class</h2>
+    <a href='add_class.php'><button id="add" class="btn btn-primary">Add Class</button></a>
     <div class="table-responsive">          
     <table class="table">
       <thead>
@@ -104,19 +111,24 @@
           <th>Class Code</th>
           <th>Teacher ID</th>
           <th>Teacher's Surname</th>
+          <th>View</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
           <?php 
-            if ($result->num_rows >  0) {
+            if ($result->num_rows  >  0) {
               while($row = $result->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>".$row['subject_name']."</td>";
                   echo "<td>".$row['subject_code']."</td>";
                   echo "<td>".$row['teacher_id']."</td>";
                   echo "<td>".$row['first_name']. " " .$row['last_name']."</td>";
+                  echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
+                       <button class='btn btn-success' value=".$row['subject_id'].">
+                         <i class='fa fa-eye' aria-hidden='true'></i>
+                       </button></a></td>";
                   echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
                        <button class='btn btn-warning' value=".$row['subject_id'].">
                          <i class='fa fa-pencil' aria-hidden='true'></i>
