@@ -189,7 +189,7 @@ span.psw {
 
       $insert_sql = "INSERT INTO users (username, password, email, usertype) VALUES ('".$_POST['username']."', '".$_POST['password']."', '".$_POST['email']."', '".$_POST['usertype']."')";
 
-      echo(mysqli_query($conn, $insert_sql) ? "User successfully added to the database": "Failed to update database");
+      echo (mysqli_query($conn, $insert_sql) ? "User successfully added to the database": "Failed to update database");
 
       $row = mysqli_fetch_array(mysqli_query($conn, "SELECT id FROM users WHERE username = '".$_POST['username']."'"), MYSQLI_ASSOC);
 

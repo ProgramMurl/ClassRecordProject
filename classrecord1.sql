@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 27, 2019 at 06:26 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 5.6.40
+-- Generation Time: May 28, 2019 at 10:37 AM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,28 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `grading_system`
---
-
-CREATE TABLE `grading_system` (
-  `subject_id` int(11) NOT NULL,
-  `exam` double NOT NULL,
-  `assignment` double NOT NULL,
-  `quiz` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `requirement`
 --
 
 CREATE TABLE `requirement` (
   `requirement_id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
-  `id_number` int(8) NOT NULL,
-  `requirement_type` varchar(100) NOT NULL,
+  `requirement_type` varchar(10) NOT NULL,
+  `requirement_name` varchar(100) NOT NULL,
+  `requirement_description` varchar(3000) NOT NULL,
+  `total_score` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requirement_record`
+--
+
+CREATE TABLE `requirement_record` (
+  `requirement_id` int(11) NOT NULL,
+  `student_id` int(11) NOT NULL,
+  `score` int(10) NOT NULL,
   `grade` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -58,22 +58,10 @@ CREATE TABLE `requirement` (
 
 CREATE TABLE `student` (
   `student_id` int(11) NOT NULL,
-  `id_number` int(8) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
+  `id_number` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL,
-  `grade` int(11) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `student`
---
-
-INSERT INTO `student` (`student_id`, `id_number`, `first_name`, `last_name`, `image`, `grade`, `user_id`) VALUES
-(25, 12013659, 'Martha', 'Smith', 'images/girl2.jpg', 0, 0),
-(26, 16024985, 'Sam', 'Stone', 'images/noavatar.png', 0, 0),
-(27, 15109857, 'Diane', 'Samson', 'images/pink.jpg', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -84,7 +72,7 @@ INSERT INTO `student` (`student_id`, `id_number`, `first_name`, `last_name`, `im
 CREATE TABLE `student_record` (
   `student_id` int(11) NOT NULL,
   `subject_id` int(11) NOT NULL,
-  `final_grade` double NOT NULL DEFAULT '0'
+  `final_grade` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -96,18 +84,12 @@ CREATE TABLE `student_record` (
 CREATE TABLE `subject` (
   `subject_id` int(11) NOT NULL,
   `subject_name` varchar(100) NOT NULL,
-  `subject_code` varchar(30) NOT NULL,
-  `teacher_id` int(11) NOT NULL
+  `subject_code` varchar(100) NOT NULL,
+  `teacher_id` int(11) NOT NULL,
+  `exam_weight` double NOT NULL,
+  `assignment_weight` double NOT NULL,
+  `quiz_weight` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `subject`
---
-
-INSERT INTO `subject` (`subject_id`, `subject_name`, `subject_code`, `teacher_id`) VALUES
-(15, 'Web Development', 'cpe75n', 1),
-(16, 'CISCO1', 'cpe73n', 1),
-(17, 'Data Structures', 'cpe324n', 1);
 
 -- --------------------------------------------------------
 
@@ -117,17 +99,8 @@ INSERT INTO `subject` (`subject_id`, `subject_name`, `subject_code`, `teacher_id
 
 CREATE TABLE `teacher` (
   `teacher_id` int(11) NOT NULL,
-  `first_name` varchar(100) NOT NULL,
-  `last_name` varchar(100) NOT NULL,
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `teacher`
---
-
-INSERT INTO `teacher` (`teacher_id`, `first_name`, `last_name`, `user_id`) VALUES
-(1, 'Darwin', 'Lee', 4);
 
 -- --------------------------------------------------------
 
@@ -137,6 +110,8 @@ INSERT INTO `teacher` (`teacher_id`, `first_name`, `last_name`, `user_id`) VALUE
 
 CREATE TABLE `users` (
   `id` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
   `username` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
@@ -144,57 +119,55 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `usertype`) VALUES
-(1, 'tadmin', 'tadmin@school.com', '1234', 'teacher'),
-(4, 'teach1', 'iteach@email.com', 'teacher', 'teacher');
-
---
 -- Indexes for dumped tables
 --
-
---
--- Indexes for table `grading_system`
---
-ALTER TABLE `grading_system`
-  ADD UNIQUE KEY `subject_id` (`subject_id`);
 
 --
 -- Indexes for table `requirement`
 --
 ALTER TABLE `requirement`
   ADD PRIMARY KEY (`requirement_id`),
-  ADD UNIQUE KEY `student_id` (`student_id`),
-  ADD UNIQUE KEY `subject_id` (`subject_id`);
+  ADD UNIQUE KEY `subject_id_2` (`subject_id`),
+  ADD KEY `subject_id` (`subject_id`);
+
+--
+-- Indexes for table `requirement_record`
+--
+ALTER TABLE `requirement_record`
+  ADD KEY `requirement_id` (`requirement_id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `student`
 --
 ALTER TABLE `student`
-  ADD PRIMARY KEY (`student_id`) USING BTREE;
+  ADD PRIMARY KEY (`student_id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `student_record`
 --
 ALTER TABLE `student_record`
-  ADD UNIQUE KEY `student_id` (`student_id`),
-  ADD UNIQUE KEY `subject_id` (`subject_id`);
+  ADD UNIQUE KEY `student_id_2` (`student_id`,`subject_id`),
+  ADD KEY `student_id` (`student_id`),
+  ADD KEY `subject_id` (`subject_id`);
 
 --
 -- Indexes for table `subject`
 --
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`subject_id`),
-  ADD KEY `teacher_id` (`teacher_id`) USING BTREE;
+  ADD UNIQUE KEY `teacher_id_2` (`teacher_id`),
+  ADD KEY `teacher_id` (`teacher_id`);
 
 --
 -- Indexes for table `teacher`
 --
 ALTER TABLE `teacher`
   ADD PRIMARY KEY (`teacher_id`),
-  ADD UNIQUE KEY `user_id` (`user_id`);
+  ADD UNIQUE KEY `user_id_2` (`user_id`),
+  ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -210,48 +183,48 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `requirement`
 --
 ALTER TABLE `requirement`
-  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `requirement_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `grading_system`
---
-ALTER TABLE `grading_system`
-  ADD CONSTRAINT `grading_system_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`);
-
---
 -- Constraints for table `requirement`
 --
 ALTER TABLE `requirement`
-  ADD CONSTRAINT `requirement_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`),
-  ADD CONSTRAINT `requirement_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`);
+  ADD CONSTRAINT `requirement_ibfk_1` FOREIGN KEY (`subject_id`) REFERENCES `subject` (`subject_id`);
+
+--
+-- Constraints for table `requirement_record`
+--
+ALTER TABLE `requirement_record`
+  ADD CONSTRAINT `requirement_record_ibfk_1` FOREIGN KEY (`requirement_id`) REFERENCES `requirement` (`requirement_id`),
+  ADD CONSTRAINT `requirement_record_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`);
 
 --
 -- Constraints for table `student`
