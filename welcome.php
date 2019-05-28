@@ -1,7 +1,7 @@
 <?php
   session_start();
 
-  if(!isset($_SESSION['active_user_id'])){
+  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_id'])){
     session_unset();
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
