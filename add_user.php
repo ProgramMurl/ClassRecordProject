@@ -5,7 +5,6 @@
 <title>Sign Up</title>
 <style>
 body, p {font-family: Arial, Helvetica, sans-serif;}
-
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
@@ -23,7 +22,6 @@ input[type=text], input[type=password] {
   background-size: cover;
   position: relative;
 }
-
 /* Set a style for all buttons */
 button {
   background-color: #004080;
@@ -34,11 +32,9 @@ button {
   cursor: pointer;
   width: 40%;
 }
-
 button:hover {
   opacity: 0.8;
 }
-
 /* Extra styles for the cancel button */
 .cancelbtn {
   width: 40%;
@@ -47,29 +43,24 @@ button:hover {
   border: none;
   background-color: #f44336;
 }
-
 /* Center the image and position the close button */
 .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;
   position: relative;
 }
-
 img.avatar {
   width: 40%;
   border-radius: 50%;
 }
-
 .container {
   padding: 16px;
   max-width: 100%;
 }
-
 span.psw {
   float: right;
   padding-top: 16px;
 }
-
 /* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
@@ -84,35 +75,29 @@ span.psw {
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   padding-top: 60px;
 }
-
 /* Modal Content/Box */
 .modal-content {
   background-color: #fefefe;
   margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
   width: 520px; /* Could be more or less, depending on screen size */
-  height: 620px;
+  height: 680px;
   position: relative;
   box-sizing: border-box;
 }
-
-
 /* Add Zoom Animation */
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
 }
-
 @-webkit-keyframes animatezoom {
   from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-
 @keyframes animatezoom {
   from {transform: scale(0)}
   to {transform: scale(1)}
 }
-
 /* Change styles for span and cancel button on extra small screens */
 @media screen and (max-width: 300px) {
   span.psw {
@@ -132,23 +117,26 @@ span.psw {
      <h2>Sign Up</h2>
     </div>
 
-    <form class="modal-content animate" method="post" action="login.php">
+    <form class="modal-content animate" method="post" action="add_user.php">
     <div class="imgcontainer">
-      <img src="noavatar.png" alt="Circle" class="avatar" style="width: 170px; height: 100px;">
+      <img src="resources/noavatar.png" alt="Circle" class="avatar" style="width: 170px; height: 100px;">
     </div>
 
      <div class="container">
         <label for="usern"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="usern" required>
 
-        <label for="usern"><b>Email</b></label>
+        <label for="mail"><b>Email</b></label>
         <input type="text" placeholder="Enter Username" name="mail" required>
 
         <label for="passw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="passw" required>
 
-        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <label for="passw-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="passw-repeat" required>
+
+        <label for="usertype"><b>Type</b></label>
+        <input type="text" placeholder="e.g Teacher or Student" name="usertype" required>
 
         <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
 
@@ -175,41 +163,43 @@ span.psw {
   include("config.php");
   // -- TEST SECTION
   // test values, remove section in actual usage
-  $_POST['username'] = "user8";
-  $_POST['password'] = "password";
-  $_POST['email'] = "user@email.com";
-  $_POST['usertype'] = "student";
-  $_POST['firstname'] = "Bob";
-  $_POST['lastname'] = "Ong";
+ // $_POST['username'] = "teach1";
+  //$_POST['password'] = "teacher";
+ // $_POST['email'] = "iteach@email.com";
+  //$_POST['usertype'] = "teacher";
+ //$_POST['firstname'] = "Darwin";
+ // $_POST['lastname'] = "Lee";
   // -- END OF TEST SECTION
 
-  if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['usertype'])){
 
+  if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['usertype'])){
+    var_dump($insert_query);
     if(mysqli_num_rows(mysqli_query($conn, "SELECT id FROM users WHERE username = '".$_POST['username']."'")) == 0){
 
       $insert_sql = "INSERT INTO users (username, password, email, usertype) VALUES ('".$_POST['username']."', '".$_POST['password']."', '".$_POST['email']."', '".$_POST['usertype']."')";
 
-      echo (mysqli_query($conn, $insert_sql) ? "User successfully added to the database": "Failed to update database");
+      echo(mysqli_query($conn, $insert_sql) ? "User successfully added to the database": "Failed to update database");
 
       $row = mysqli_fetch_array(mysqli_query($conn, "SELECT id FROM users WHERE username = '".$_POST['username']."'"), MYSQLI_ASSOC);
 
       if($row){
-
-        if($_POST['usertype'] == "student"){
+        if(($_POST['usertype'] == "Student")|| ($_POST['usertype'] == "student")){
 
           $student_sql = "INSERT INTO student (first_name, last_name, user_id) VALUES ('".$_POST['firstname']."', '".$_POST['lastname']."', '".$row['id']."')";
           echo("<br>");
           echo(mysqli_query($conn, $student_sql) ? "Student successfully added to the database": "Failed to update database");
+
         }
 
-        else if($_POST['usertype'] == "teacher"){
+        else if(($_POST['usertype'] == "Teacher")||($_POST['usertype'] == "teacher")){
 
           $teacher_sql = "INSERT INTO teacher (first_name, last_name, user_id) VALUES ('".$_POST['firstname']."', '".$_POST['lastname']."', '".$row['id']."')";
           echo("<br>");
           echo(mysqli_query($conn, $teacher_sql) ? "Teacher successfully added to the database": "Failed to update database");
         }
       }
-    }else{
+    }
+    else{
       echo("Username is already in use!");
     }
   }
