@@ -98,7 +98,34 @@
     <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
       <br>
       <h1 class="w3-jumbo"><span class="w3-hide-small"></span> Welcome back!</h1>
-      <img src="resources/space.png" alt="space" class="w3-image" width="1002" height="1208">
+      <!-- <img src="resources/space.png" alt="space" class="w3-image" width="1002" height="1208"> -->
+      <div class="card-deck">
+      <div class="card" style="width: 16rem;">
+        <img class="card-img-top" src="resources/mortarboard.png " alt="Card image cap">
+        <div class="card-body">
+          <!-- <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+        <div class="card" style="width: 16rem;">
+        <img class="card-img-top" src="resources/mortarboard.png " alt="Card image cap">
+        <div class="card-body">
+          <!-- <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+        <div class="card" style="width: 16rem;">
+        <img class="card-img-top" src="resources/mortarboard.png " alt="Card image cap">
+        <div class="card-body">
+          <!-- <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+
+        </div>
+      </div>
     </header>
   </div>
   <!-- END PAGE CONTENT -->
