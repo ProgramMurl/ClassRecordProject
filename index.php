@@ -1,3 +1,34 @@
+<?php
+  include("config.php");
+  session_start();
+
+  if(isset($_SESSION['active_user_id'])){
+    header("location: welcome.php"); // redirect to welcome.php if user is already logged in
+  }
+
+  if(isset($_POST['login_user'])) {
+    $myusername = $_POST['username'];
+    $mypassword = $_POST['password'];
+
+    if(empty($myusername) && empty($mypassword)) {
+      die("Username and password is required");
+    }else{
+      $sql = "SELECT * FROM users WHERE username = '".$myusername."' and password = '".$mypassword."'";
+      $result = $conn->query($sql);
+
+      if($result->num_rows > 0){
+        while($row=$result->fetch_assoc()){
+          $_SESSION['active_user_username'] = $row['username'];
+          $_SESSION['active_user_id'] = $row['id'];
+          header('location: welcome.php');
+        }
+      }else{
+        header('location: index.php');
+      }
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +47,7 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 .bg-img {
-  background-image: url("blue.jpg");
+  background-image: url("resources/blue.jpg");
   min-height: 380px;
   background-position: center;
   background-repeat: no-repeat;
@@ -102,12 +133,12 @@ span.psw {
 }
 
 @-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
+  from {-webkit-transform: scale(0)}
   to {-webkit-transform: scale(1)}
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
+  from {transform: scale(0)}
   to {transform: scale(1)}
 }
 
@@ -129,18 +160,18 @@ span.psw {
     <div class="modal">
      <h2>Login</h2>
     </div>
-    
-    <form class="modal-content animate" method="post" action="login.php">
+
+    <form class="modal-content animate" method="post" action="index.php">
     <div class="imgcontainer">
-      <img src="img_avatar2.png" alt="Avatar" class="avatar">
-    </div> 
+      <img src="resources/img_avatar2.png" alt="Avatar" class="avatar">
+    </div>
 
      <div class="container">
         <label for="usern"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="usern" required>
+      <input type="text" placeholder="Enter Username" name="username" required>
 
       <label for="passw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="passw" required>
+      <input type="password" placeholder="Enter Password" name="password" required>
 
         <button type="submit" class="btn" name="login_user">Login</button>
      <label>
@@ -152,6 +183,6 @@ span.psw {
          Not yet a member? <a href="add_user.php">Sign up</a>
      </p>
     </form>
-   
+
 </body>
 </html>

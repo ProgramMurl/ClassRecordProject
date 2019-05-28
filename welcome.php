@@ -1,3 +1,12 @@
+<?php
+  session_start();
+
+  if(!isset($_SESSION['active_user_id'])){
+    session_unset();
+    session_destroy(); // destroy any other existing sessions
+    header("location: index.php"); // redirect users back to login page
+  }
+?>
 <!DOCTYPE html>
 <html>
   <title>Welcome</title>
@@ -50,7 +59,7 @@
     <i class="fa fa-cog w3-large"></i>
     <p>SETTINGS</p>
   </a>
-  <a href="index.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="kill_session.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-sign-out w3-large"></i>
     <p>LOGOUT</p>
   </a>
@@ -63,7 +72,7 @@
     <a href="" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
     <a href="" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
     <a href="" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
-    <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
+    <a href="kill_session.php" class="w3-bar-item w3-button"style="width:25% !important">
     LOGOUT</a>
   </div>
 </div>
@@ -74,8 +83,7 @@
   <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
     <br>
     <h1 class="w3-jumbo"><span class="w3-hide-small"></span> Welcome back!</h1>
-    <img src="space.png" alt="space" class="w3-image" width="1002" height="1208">
-  
+    <img src="resources/space.png" alt="space" class="w3-image" width="1002" height="1208">
   </header>
 
 <!-- END PAGE CONTENT -->
