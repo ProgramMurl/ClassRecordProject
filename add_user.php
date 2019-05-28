@@ -1,3 +1,32 @@
+<?php
+  // notes: include checking if user is already logged in or not -- do that later
+  // notes: replace SESSION data with POST data
+  // notes: record duplication checking should be added
+  // notes: set error messages in sessions
+  session_start();
+  include("config.php");
+
+  var_dump($_SESSION);
+  if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['first_name']) && isset($_POST['last_name']) && isset($_POST['repeat_password'])){
+    // check if username is not in use yet
+    if(mysqli_num_rows(mysqli_query($conn, "SELECT teacher_id FROM teacher WHERE username = '".$_POST['username']."'")) == 0){
+      $insert_sql = "INSERT INTO teacher (username, password, email, first_name, last_name) VALUES ('".$_POST['username']."', '".$_POST['password']."', '".$_POST['email']."', '".$_POST['first_name']."', '".$_POST['last_name']."')";
+      if(mysqli_query($conn, $insert_sql)){
+        session_unset();
+        session_destroy();
+        $_SESSION['success_msg'] = "Successfully added ".$_POST['first_name']." ".$_POST['last_name']."!";
+      }else{
+        session_unset();
+        session_destroy();
+        $_SESSION['error_msg'] = "Error updating the database. Please contact the IT administrator.";
+      }
+    }else{
+      session_unset();
+      session_destroy();
+      $_SESSION['error_msg'] = "Username is already in use!";
+    }
+  }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +45,7 @@ input[type=text], input[type=password] {
   box-sizing: border-box;
 }
 .bg-img {
-  background-image: url("blue.jpg");
+  background-image: url("resources/blue.jpg");
   min-height: 380px;
   background-position: center;
   background-repeat: no-repeat;
@@ -125,92 +154,44 @@ span.psw {
 }
 </style>
 </head>
-
 <body class="bg-img">
-
-    <div class="modal">
-     <h2>Sign Up</h2>
-    </div>
-
-    <form class="modal-content animate" method="post" action="login.php">
+  <div class="modal">
+    <h2>Sign Up</h2>
+  </div>
+  <form class="modal-content animate" method="post" action="add_user.php">
     <div class="imgcontainer">
-      <img src="noavatar.png" alt="Circle" class="avatar" style="width: 170px; height: 100px;">
+      <img src="resources/noavatar.png" alt="Circle" class="avatar" style="width: 170px; height: 100px;">
     </div>
 
-     <div class="container">
-        <label for="usern"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" name="usern" required>
+    <div class="container">
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
 
-        <label for="usern"><b>Email</b></label>
-        <input type="text" placeholder="Enter Username" name="mail" required>
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
 
-        <label for="passw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="passw" required>
+      <label for="first_name"><b>First Name</b></label>
+      <input type="text" placeholder="Enter First Name" name="first_name" required>
 
-        <label for="psw-repeat"><b>Repeat Password</b></label>
-        <input type="password" placeholder="Repeat Password" name="passw-repeat" required>
+      <label for="last_name"><b>Last Name</b></label>
+      <input type="text" placeholder="Enter Last Name" name="last_name" required>
 
-        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
 
-        <div class="clearfix">
+      <label for="repeat_password"><b>Repeat Password</b></label>
+      <input type="password" placeholder="Repeat Password" name="repeat_password" required>
 
+      <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+      <div class="clearfix">
         <button type="submit" class="btn" name="sign_up">Sign Up</button>
         <button class="cancelbtn" name="cancel" onClick="Javascript:window.location.href= 'index.php';"> Cancel </button>
-        </div>
-        <label>
-           <input type="checkbox" checked="checked" name="remember"> Remember me
-        </label>
-     </div>
-    </form>
-
+      </div>
+      <label>
+         <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+    </div>
+  </form>
 </body>
 </html>
-
-
-<?php
-  // notes: include checking if user is already logged in or not -- do that later
-  // notes: replace SESSION data with POST data
-  // notes: record duplication checking should be added
-  // notes: set error messages in sessions
-  include("config.php");
-  // -- TEST SECTION
-  // test values, remove section in actual usage
-  $_POST['username'] = "user8";
-  $_POST['password'] = "password";
-  $_POST['email'] = "user@email.com";
-  $_POST['usertype'] = "student";
-  $_POST['firstname'] = "Bob";
-  $_POST['lastname'] = "Ong";
-  // -- END OF TEST SECTION
-
-  if(isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['usertype'])){
-
-    if(mysqli_num_rows(mysqli_query($conn, "SELECT id FROM users WHERE username = '".$_POST['username']."'")) == 0){
-
-      $insert_sql = "INSERT INTO users (username, password, email, usertype) VALUES ('".$_POST['username']."', '".$_POST['password']."', '".$_POST['email']."', '".$_POST['usertype']."')";
-
-      echo (mysqli_query($conn, $insert_sql) ? "User successfully added to the database": "Failed to update database");
-
-      $row = mysqli_fetch_array(mysqli_query($conn, "SELECT id FROM users WHERE username = '".$_POST['username']."'"), MYSQLI_ASSOC);
-
-      if($row){
-
-        if($_POST['usertype'] == "student"){
-
-          $student_sql = "INSERT INTO student (first_name, last_name, user_id) VALUES ('".$_POST['firstname']."', '".$_POST['lastname']."', '".$row['id']."')";
-          echo("<br>");
-          echo(mysqli_query($conn, $student_sql) ? "Student successfully added to the database": "Failed to update database");
-        }
-
-        else if($_POST['usertype'] == "teacher"){
-
-          $teacher_sql = "INSERT INTO teacher (first_name, last_name, user_id) VALUES ('".$_POST['firstname']."', '".$_POST['lastname']."', '".$row['id']."')";
-          echo("<br>");
-          echo(mysqli_query($conn, $teacher_sql) ? "Teacher successfully added to the database": "Failed to update database");
-        }
-      }
-    }else{
-      echo("Username is already in use!");
-    }
-  }
-?>
