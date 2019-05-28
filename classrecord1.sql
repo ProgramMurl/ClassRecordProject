@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2019 at 10:37 AM
+-- Generation Time: May 28, 2019 at 12:12 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -102,6 +102,13 @@ CREATE TABLE `teacher` (
   `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `teacher`
+--
+
+INSERT INTO `teacher` (`teacher_id`, `user_id`) VALUES
+(1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -117,6 +124,13 @@ CREATE TABLE `users` (
   `password` varchar(100) NOT NULL,
   `usertype` varchar(7) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `usertype`) VALUES
+(1, 'Bob', 'Uy', 'tadmin', 'email@school.com', 'pass1234', 'teacher');
 
 --
 -- Indexes for dumped tables
@@ -149,7 +163,6 @@ ALTER TABLE `student`
 -- Indexes for table `student_record`
 --
 ALTER TABLE `student_record`
-  ADD UNIQUE KEY `student_id_2` (`student_id`,`subject_id`),
   ADD KEY `student_id` (`student_id`),
   ADD KEY `subject_id` (`subject_id`);
 
@@ -201,13 +214,13 @@ ALTER TABLE `subject`
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
