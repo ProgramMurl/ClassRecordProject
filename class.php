@@ -33,6 +33,7 @@
   #add{
     margin-left: 70em;
     margin-bottom: 2em;
+    margin-top:-3em;
     position: absolute
   }
   
@@ -101,7 +102,7 @@
   <!-- Header/Home -->  
   <div class="container">
     <h2>Class</h2>
-    <button id="add" class="btn btn-primary">Add Class</button>
+    <a href='add_class.php'><button id="add" class="btn btn-primary">Add Class</button></a>
     <div class="table-responsive">          
     <table class="table">
       <thead>
@@ -117,7 +118,7 @@
       </thead>
       <tbody>
           <?php 
-            if ($result->num_rows  <  0) {
+            if ($result->num_rows  >  0) {
               while($row = $result->fetch_assoc()) {
                   echo "<tr>";
                   echo "<td>".$row['subject_name']."</td>";
