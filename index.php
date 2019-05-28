@@ -13,7 +13,7 @@
     if(empty($myusername) && empty($mypassword)) {
       die("Username and password is required");
     }else{
-      $sql = "SELECT * FROM users WHERE username = '".$myusername."' and password = '".$mypassword."'";
+      $sql = "SELECT * FROM teacher WHERE username = '".$myusername."' and password = '".$mypassword."'";
       $result = $conn->query($sql);
 
       if($result->num_rows > 0){
@@ -166,9 +166,9 @@
       <img src="resources/img_avatar2.png" alt="Avatar" class="avatar">
     </div>
     <div class="container">
-      <label for="usern"><b>Username</b></label>
+      <label for="username"><b>Username</b></label>
       <input type="text" placeholder="Enter Username" name="username" required>
-      <label for="passw"><b>Password</b></label>
+      <label for="password"><b>Password</b></label>
       <input type="password" placeholder="Enter Password" name="password" required>
       <button type="submit" class="btn" name="login_user">Login</button>
       <label>
@@ -177,7 +177,7 @@
     </div>
     <div class="container"style="background-color:#f1f1f1">
     <p>
-    Not yet a member? <a href="add_user.php">Sign up</a>
+    Not yet a student? <a href="add_user.php">Sign up</a>
     </p>
   </form>
 </body>
