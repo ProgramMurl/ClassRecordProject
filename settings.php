@@ -131,7 +131,7 @@
         <h2><span>Class Options</span><br>___________________________</h2>
         <button id="cclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'createclass.php';">Create Class</button>
         <br>
-        <button id="rclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updateclass.php';" >Rename Class</button>
+        <button id="rclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';" >Rename Class</button>
         <br>
         <button id="dclassbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';" >Delete Class</button>
       </fieldset>
