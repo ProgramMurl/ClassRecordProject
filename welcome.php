@@ -34,7 +34,7 @@
     }
 
     .header{
-      background-image: url('resources/headerback.jpg');
+      /*background-image: url('resources/headerback.jpg');*/
       background-attachment: fixed;
       background-size: cover;
       background-position: center;
@@ -48,35 +48,8 @@
       color:#fff;
     }
 
-    .description{
-      position: absolute;
-      top: 30%;
-      margin: auto;
-      padding: 2em;
-    }
-
-    .description h1{
-     color:#F97300 ;
-    }
-    .description p{
-     color:#666;
-     font-size: 20px;
-     width: 50%;
-     line-height: 1.5;
-    }
-    .description button{
-     border:1px  solid #F97300;
-     background:#F97300;
-     color:#fff;
-    }
-
-    .overlay{
-      position: absolute;
-      min-height: 100%;
-      min-width: 100%;
-      left: 0;
-      top: 0;
-      background: rgba(244, 244, 244, 0.79);
+    .card{
+       background-color: #fff;
     }
 
     .w3-row-padding img{
@@ -137,25 +110,25 @@
   <div class="w3-padding-large" id="main">
     <!-- Header/Home -->
     <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-      <!-- <div class="overlay"></div> -->
-      <div class="container">
+     <!--  <div class="overlay"></div>
+      <div class="container" style="background-image:'resources/headerback.jpg'">
         <div class="description">
            <h1>    Hello ,Welcome To My official Website
             <p>    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>   
              <button class="btn btn-outline-secondary btn-lg">See more</button>  </h1>  
         </div>
-      </div>
-    </header>
+      </div> -->
+    <!-- </header> -->
       <!-- <h1 class="w3-jumbo"><span class="w3-hide-small"></span> Welcome back!</h1> -->
       <!-- <img src="resources/space.png" alt="space" class="w3-image" width="1002" height="1208"> -->
       <br>
-      <section id="actions">
+      <div id="actions">
       <div class="container-fluid mt-4">
         <div class="row justify-content-center">
             <div class="col-auto mb-3">
               <div class="card" style="width: 16rem;">
-                <img class="card-img-top" src="resources/mortarboard1.png " alt="Card image cap">
+                <img class="card-img-top" src="resources/desk.jpg" alt="Card image cap">
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
@@ -165,7 +138,7 @@
             </div>
             <div class="col-auto mb-3">
               <div class="card" style="width: 16rem;">
-                <img class="card-img-top" src="resources/mortarboard1.png " alt="Card image cap">
+                <img class="card-img-top" src="resources/class.jpg " alt="Card image cap">
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
@@ -175,7 +148,7 @@
             </div>
             <div class="col-auto mb-3">
               <div class="card" style="width: 16rem;">
-                <img class="card-img-top" src="resources/mortarboard1.png " alt="Card image cap">
+                <img class="card-img-top" src="resources/setting1.png " alt="Card image cap">
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
@@ -186,7 +159,8 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</header>
   <!-- END PAGE CONTENT -->
 </body>
 </html>
