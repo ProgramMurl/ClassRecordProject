@@ -49,7 +49,7 @@
     }
 
     .card{
-       background-color: #fff;
+       background-color: #1f2530;
     }
 
     .w3-row-padding img{
@@ -142,17 +142,17 @@
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="#" class="btn">Go somewhere</a>
+                  <a href="class.php" class="btn">Class</a>
                 </div>
               </div>
             </div>
             <div class="col-auto mb-3">
               <div class="card" style="width: 16rem;">
-                <img class="card-img-top" src="resources/setting1.png " alt="Card image cap">
+                <img class="card-img-top" src="resources/test.jpg " alt="Card image cap">
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="#" class="btn">Go somewhere</a>
+                  <a href="#" class="btn">Grades</a>
                 </div>
               </div>
             </div>
