@@ -135,6 +135,8 @@
           <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addrequirement.php';">Add (Exam/Quiz/Assignment)</button>
           <br>
           <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deleterequirement.php';">Delete (Exam/Quiz/Assignment)</button>
+          <br>
+          <button id="vebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'viewreq.php';">View Requirements</button>
         </fieldset>
       </div>
     </header>
