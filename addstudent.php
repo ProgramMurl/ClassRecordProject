@@ -109,14 +109,14 @@
             <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div>
       			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"> </div>
       			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" placeholder="Last Name"></div>
-            <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div><br>
+            <br>
       			<input type="hidden" name="size" value="1000000">
               <div>
                 <input type="file" name="image">
               </div>
       		</fieldset> <br>
     		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
-    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button>
+    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'classoptions.php';">Back</button>
     		</form>
     </div>
   </header>
@@ -130,7 +130,7 @@
     $first=$_POST['fname'];
     $last=$_POST['lname'] ;
     $idno= $_POST['idnum'];
-    $course=$_POST['ccode'];
+    
     $file_name = basename($_FILES['image']['name']);
     $file_tmp_name = $_FILES['image']['tmp_name'];
     $temp = $target_dir."".$file_name;
