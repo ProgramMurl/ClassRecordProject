@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 28, 2019 at 06:16 PM
--- Server version: 10.1.35-MariaDB
--- PHP Version: 7.2.9
+-- Generation Time: May 30, 2019 at 02:30 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -64,6 +64,13 @@ CREATE TABLE `student` (
   `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `student`
+--
+
+INSERT INTO `student` (`student_id`, `first_name`, `last_name`, `id_number`, `image`) VALUES
+(1, 'Martha', 'Smith', '12013659', 'images/girl.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -92,6 +99,13 @@ CREATE TABLE `subject` (
   `quiz_weight` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `subject`
+--
+
+INSERT INTO `subject` (`subject_id`, `subject_name`, `subject_code`, `teacher_id`, `exam_weight`, `assignment_weight`, `quiz_weight`) VALUES
+(1, 'Web Development', 'cpe75n', 1, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -113,10 +127,7 @@ CREATE TABLE `teacher` (
 
 INSERT INTO `teacher` (`teacher_id`, `first_name`, `last_name`, `username`, `email`, `password`) VALUES
 (1, 'Bob', 'Uy', 'tadmin', 'email@school.com', 'pass1234'),
-(2, 'Bran', 'Ben', 'pandabran', 'b@b.com', 'pass'),
-(3, 'brandon', 'b', 'brandy', 'b@b.com', 'pass'),
-(4, 'test', 'data', 'testing', 'e@mail.com', 'pass'),
-(5, 'test', 'ting', 'test2', 'e@mail.com', 'ewgkno');
+(2, 'Bran', 'Ben', 'pandabran', 'b@b.com', 'pass');
 
 --
 -- Indexes for dumped tables
@@ -178,13 +189,13 @@ ALTER TABLE `requirement`
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `teacher`
