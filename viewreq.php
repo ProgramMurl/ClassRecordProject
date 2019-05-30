@@ -101,7 +101,7 @@
   <!-- Header/Home -->
   <div class="container">
     <h2>List of Requirements</h2>
-    <a href='addstudent.php'><button id="add" class="btn w3-cyan">Add Requirement</button></a>
+    <a href='addrequirement.php'><button id="add" class="btn w3-cyan">Add Requirement</button></a>
     <div class="table-responsive">
     <table class="table">
       <thead>

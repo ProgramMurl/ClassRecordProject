@@ -120,7 +120,7 @@
               <option value="assigment">Assignment</option>
             </select><br>
             <div class="w3-center">Requirement Name<input type="text" name="rname" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div>
-            <div class="w3-center">Requirement Description<input type="text" name="rdesc" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div>
+            <div class="w3-center">Requirement Description<input type="text" name="rdesc" required="required" placeholder="e.g Exam for Chapter 1"> </div>
             <label>Select subject</label>
             <select name="subject_id">
               <?php
