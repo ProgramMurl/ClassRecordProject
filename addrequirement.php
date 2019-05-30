@@ -14,39 +14,39 @@
 
 
   <style>
-	  body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
-	  form {
-		/* Just to center the form on the page */
-		margin: 0 auto;
-		width: 400px;
-		/* To see the outline of the form */
-		padding: 1em;
-		border: 1px solid #CCC;
-		border-radius: 1em;
-		display: inline-block;
-		}
+    body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+    form {
+    /* Just to center the form on the page */
+    margin: 0 auto;
+    width: 400px;
+    /* To see the outline of the form */
+    padding: 1em;
+    border: 1px solid #CCC;
+    border-radius: 1em;
+    display: inline-block;
+    }
 
-	form div + div {
-		margin-top: 1em;
-	}
-	
-	input[type=text], input[type=date], input[type=tel], select, textarea {
-	  	width: 100%;
-	  	padding: 12px 20px;
-	  	margin: 8px 0;
-	  	display: inline-block;
-	  	border: 1px solid #ccc;
-	  	border-radius: 4px;
-	  	box-sizing: border-box;
-		}
-	  .w3-row-padding img {margin-bottom: 12px}
-	  /* Set the width of the sidebar to 120px */
-	  .w3-sidebar {width: 100px;background: #222;}
-	  /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
-	  #main {margin-left: 120px}
-	  /* Remove margins from "page content" on small screens */
-	  @media only screen and (max-width: 600px) {#main {margin-left: 0}}
-	  </style>
+  form div + div {
+    margin-top: 1em;
+  }
+  
+  input[type=text], input[type=date], input[type=tel], select, textarea {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+    .w3-row-padding img {margin-bottom: 12px}
+    /* Set the width of the sidebar to 120px */
+    .w3-sidebar {width: 100px;background: #222;}
+    /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+    #main {margin-left: 120px}
+    /* Remove margins from "page content" on small screens */
+    @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+    </style>
 
 <body class="w3-black">
 
@@ -86,24 +86,27 @@
   <!-- Header/Home -->  
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="addrequirement.php" method="post">
+        <form action="addrequirement.php" method="post">
           <fieldset>
-      		 <legend><h4>Add Requirement</h4></legend> 
+           <legend><h4>Add Requirement</h4></legend> 
            <label>Select the category</label>
             <select name="Select[]" >
               <option value="quiz">Quiz</option>
               <option value="exam">Exam</option>
               <option value="ass">Assignment</option>
               </select><br><br>
-              <div class="w3-center"> Student ID number  <input type="text" name="idnum" required="required" placeholder="Student ID number"> </div> 
-              <div class="w3-center"> Requirement Number  <input type="text" name="rnum" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div> 
-              <div class="w3-center">Course Code <input type="text" name="ccode" required="required" placeholder="Course Code"> </div> 
+              <div class="w3-center">Requirement Name<input type="text" name="rname" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div>
+              <div class="w3-center">Requirement Description<input type="text" name="rname" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div>
+              <label>Select subject</label>
+              <select name="Select[]" >
+              <option value=" "> </option>
+              <option value=" "> </option>
+              <option value=" "> </option>
               <div class="w3-center"> Highest Possible Score <input type="text" name="hps" required="required" placeholder="Highest Possible Score"></div> 
-              <div class="w3-center"> Student Score <input type="text" name="score" required="required" placeholder="Student Score"></div> 
           </fieldset> <br>
-      		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
-      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
-    		</form>
+          <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
+          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
+        </form>
     </div>
   </header>
 <!-- END PAGE CONTENT -->
@@ -116,81 +119,81 @@
 
 <?php
 
-$idnum=$quiz=$exam=$ass=$hps=$rnum=$score=0;
-$cc="";
+// $idnum=$quiz=$exam=$ass=$hps=$rnum=$score=0;
+// $cc="";
 
-  $servername = "localhost";
-  $username ="root";
-  $password = "";
-  $Dname = "classrecord1";
+//   $servername = "localhost";
+//   $username ="root";
+//   $password = "";
+//   $Dname = "classrecord1";
 
-  $conn = new mysqli($servername, $username, $password, $Dname);
+//   $conn = new mysqli($servername, $username, $password, $Dname);
 
-  if($conn->connect_error){
-    die("Connection failed: ". $conn->connect_error);
-  }
+//   if($conn->connect_error){
+//     die("Connection failed: ". $conn->connect_error);
+//   }
 
-if(isset($_POST['submit'])){
-  $idnum = $_POST['idnum'];
-  $score = $_POST['score'];
-  $rnum = $_POST['rnum'];
-  $hps= $_POST['hps'];
-  $cc = $_POST['ccode'];
+// if(isset($_POST['submit'])){
+//   $idnum = $_POST['idnum'];
+//   $score = $_POST['score'];
+//   $rnum = $_POST['rnum'];
+//   $hps= $_POST['hps'];
+//   $cc = $_POST['ccode'];
 
-  foreach ($_POST['Select'] as $select) {
-  if ($select == "quiz") {
-      $sql="SELECT * FROM $select WHERE id_number='$idnum'AND course_code='$cc' AND ass_num='$rnum'";
-      $result1 = mysqli_query($conn,$sql);
-      if(mysqli_num_rows($result1)>0){
-          echo "<p align=center>Duplicate found</p>";
-      }
-      else{
+//   foreach ($_POST['Select'] as $select) {
+//   if ($select == "quiz") {
+//       $sql="SELECT * FROM $select WHERE id_number='$idnum'AND course_code='$cc' AND ass_num='$rnum'";
+//       $result1 = mysqli_query($conn,$sql);
+//       if(mysqli_num_rows($result1)>0){
+//           echo "<p align=center>Duplicate found</p>";
+//       }
+//       else{
 
-        $sql = "INSERT INTO $select (id_number,quiz_num, course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."', '$hps','$score')";
-          if($conn->query($sql)===TRUE){
-            die("</br> New Record created successfully");
-          }
-          else{
-            echo "Error: ". $sql. "<br>".$conn->error;
-          }
-      }
+//         $sql = "INSERT INTO $select (id_number,quiz_num, course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."', '$hps','$score')";
+//           if($conn->query($sql)===TRUE){
+//             die("</br> New Record created successfully");
+//           }
+//           else{
+//             echo "Error: ". $sql. "<br>".$conn->error;
+//           }
+//       }
 
-    }
-    elseif ($select == "exam") {
-      $sql="SELECT * FROM $select WHERE id_number='$idnum'AND course_code='$cc' AND ass_num='$rnum'";
-      $result1 = mysqli_query($conn,$sql);
-      if(mysqli_num_rows($result1)>0){
-          echo "<p align=center>Duplicate found</p>";
-      }
-      else{
+//     }
+//     elseif ($select == "exam") {
+//       $sql="SELECT * FROM $select WHERE id_number='$idnum'AND course_code='$cc' AND ass_num='$rnum'";
+//       $result1 = mysqli_query($conn,$sql);
+//       if(mysqli_num_rows($result1)>0){
+//           echo "<p align=center>Duplicate found</p>";
+//       }
+//       else{
 
-        $sql = "INSERT INTO $select ( id_number,exam_num, course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."', '$hps','$score')";
-          if($conn->query($sql)===TRUE){
-            die("</br> New Record created successfully");
-          }
-          else{
-            echo "Error: ". $sql. "<br>".$conn->error;
-          }
-      }
-    }
-    elseif ($select == "assignment") {
-      $sql="SELECT * FROM $select WHERE id_number='$idnum' AND course_code='$cc' AND ass_num='$rnum'";
-      $result1 = mysqli_query($conn,$sql);
-      if(mysqli_num_rows($result1)>0){
-          echo "<p align=center>Duplicate found</p>";
-      }
-      else{
+//         $sql = "INSERT INTO $select ( id_number,exam_num, course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."', '$hps','$score')";
+//           if($conn->query($sql)===TRUE){
+//             die("</br> New Record created successfully");
+//           }
+//           else{
+//             echo "Error: ". $sql. "<br>".$conn->error;
+//           }
+//       }
+//     }
+//     elseif ($select == "assignment") {
+//       $sql="SELECT * FROM $select WHERE id_number='$idnum' AND course_code='$cc' AND ass_num='$rnum'";
+//       $result1 = mysqli_query($conn,$sql);
+//       if(mysqli_num_rows($result1)>0){
+//           echo "<p align=center>Duplicate found</p>";
+//       }
+//       else{
 
-        $sql = "INSERT INTO $select ( id_number,ass_num,course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."','$hps','$score')";
-          if($conn->query($sql)===TRUE){
-            die("</br> <center> New Record created successfully</center>");
-          }
-          else{
-            echo "Error: ". $sql. "<br>".$conn->error;
-          }
-      }
-    }
-  }
+//         $sql = "INSERT INTO $select ( id_number,ass_num,course_code, hps, score) VALUES('$idnum', '$rnum','".$_POST['ccode']."','$hps','$score')";
+//           if($conn->query($sql)===TRUE){
+//             die("</br> <center> New Record created successfully</center>");
+//           }
+//           else{
+//             echo "Error: ". $sql. "<br>".$conn->error;
+//           }
+//       }
+//     }
+//   }
   
-}
+// }
 ?>
