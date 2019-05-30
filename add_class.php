@@ -12,9 +12,9 @@
   // $_POST['tname'] = 'Pena';
   // -- END OF TEST SECTION
 
-  if(isset($_POST['cname']) && isset($_POST['ccode']) && isset($_POST['tname'])){
+  if(isset($_POST['cname']) && isset($_POST['ccode'])){
     // query to get teacher ID from teacher surname
-    $search_teacher = "SELECT teacher_id FROM teacher WHERE last_name = '".$_POST['tname']."'";
+    $search_teacher = "SELECT teacher_id FROM teacher WHERE last_name = 'Uy'";
     $teacher_result = mysqli_query($conn, $search_teacher);
 
     $row = mysqli_fetch_array($teacher_result);

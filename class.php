@@ -110,7 +110,7 @@
           <th>Class Name</th>
           <th>Class Code</th>
           <th>Teacher ID</th>
-          <th>Teacher's Surname</th>
+          <th>Teacher's Name</th>
           <th>View</th>
           <th>Edit</th>
           <th>Delete</th>
