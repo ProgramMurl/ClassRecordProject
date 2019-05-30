@@ -120,6 +120,8 @@
         <button id="sstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'searchstudent.php';">Search Student Profile</button>
         <br>
         <button id="dstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deletestudent.php';">Delete Student Profile </button>
+        <br>
+        <button id="vstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'viewstudents.php';">View Students</button>
       </fieldset>
     </div>
   </header>
