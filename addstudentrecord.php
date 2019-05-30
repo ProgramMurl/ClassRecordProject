@@ -105,16 +105,13 @@
               $idno=0;
               $course="";
             ?>
-    		    <legend><h4>Add Student Profile</h4></legend> <br>
-            <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div>
-      			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"> </div>
-      			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" placeholder="Last Name"></div>
-            <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div><br>
-      			<input type="hidden" name="size" value="1000000">
-              <div>
-                <input type="file" name="image">
-              </div>
-      		</fieldset> <br>
+    		    <legend><h4>Add Student to Class</h4></legend> <br>
+            <label>Select student</label>
+            <select name="listofstudents">
+              <option value=" "> </option>
+              <option value=" "> </option>
+              <option value=" "> </option>
+            </select><br>
     		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
     		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button>
     		</form>
@@ -125,40 +122,12 @@
 </body>
 </html>
 <?php
-  $target_dir = "images/";
-  if(isset($_POST['submit']) && !empty($_FILES["image"]["name"])){
-    $first=$_POST['fname'];
-    $last=$_POST['lname'] ;
-    $idno= $_POST['idnum'];
-    $course=$_POST['ccode'];
-    $file_name = basename($_FILES['image']['name']);
-    $file_tmp_name = $_FILES['image']['tmp_name'];
-    $temp = $target_dir."".$file_name;
-    $file_type = pathinfo($temp,PATHINFO_EXTENSION);
-    // Allow certain file formats
-    $allowTypes = array('jpg','png','jpeg','gif','pdf');
+  
+  if(isset($_POST['submit'])){
 
-    if(in_array($file_type, $allowTypes)){
-      if(move_uploaded_file($file_tmp_name,$target_dir.$file_name)){
-        $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
-        $sql = "INSERT INTO student (id_number,first_name,last_name,image) VALUES ('$idno','$first', '$last','$temp')";
-        $result = mysqli_query($conn,$sql);
-        //echo "<p align=center>$temp</p>";
-        //echo "<p align=center>$result</p>";
+    $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
+    // $sql = "INSERT INTO student (id_number,first_name,last_name,image) VALUES ('$idno','$first', '$last','$temp')";
+    $result = mysqli_query($conn,$sql);
 
-        if(mysqli_affected_rows($conn) == 1){
-          echo "<p align=center style='color:green'><b>File has been successfully uploaded</b></p>";
-        }else{
-          echo "<p align=center>A system error has occured</p>".mysqli_error($conn);
-        }
-      }else{
-        $text = "Sorry, there was an error uploading your file.";
-      }
-    }else{
-      $text = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
-    }
-  }else{
-    $text = 'Please select a file to upload.';
   }
-  echo "<p align=center>$text</p>";
 ?>
