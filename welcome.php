@@ -128,16 +128,6 @@
         <div class="row justify-content-center">
             <div class="col-auto mb-3">
               <div class="card" style="width: 20rem;">
-                <img class="card-img-top" src="resources/desk.jpg" alt="Card image cap">
-                <div class="card-body">
-                  <!-- <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="#" class="btn">Go somewhere</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-auto mb-3">
-              <div class="card" style="width: 20rem;">
                 <img class="card-img-top" src="resources/class.jpg " alt="Card image cap">
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
@@ -153,6 +143,26 @@
                   <!-- <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
                   <a href="#" class="btn">Grades</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto mb-3">
+              <div class="card" style="width: 20rem;">
+                <img class="card-img-top" src="resources/allstudents.jpg " alt="Card image cap">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <a href="viewstudents.php" class="btn">Students</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto mb-3">
+                <div class="card" style="width: 20rem;">
+                <img class="card-img-top" src="resources/desk.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <a href="settings.php" class="btn">See More</a>
                 </div>
               </div>
             </div>
