@@ -2,11 +2,43 @@
   include("config.php");
   session_start();
 
+  define('RESPONSE_1', 'Class successfully updated in the database!');
+  define('RESPONSE_2', 'Error updating the database, please contact the IT administrator.');
+
   if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
     session_unset();
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
   }
+
+  if(isset($_POST['oname']) && isset($_POST['cname']) && isset($_POST['sub_id'])){
+    $update_sql = "UPDATE subject SET subject_name='".$_POST['oname']."', subject_code='".$_POST['cname']."' WHERE subject_id=".$_POST['sub_id'];
+    $result = mysqli_query($conn, $update_sql);
+
+    if($result){
+      $_SESSION['response_msg'] = RESPONSE_1;
+    }else{
+      $_SESSION['response_msg'] = RESPONSE_2;
+    }
+  }
+
+  if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    $verify_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id']." AND teacher_id = ".$_SESSION['active_user_id'];
+    $verify_result = mysqli_query($conn, $verify_sql);
+
+    if(mysqli_num_rows($verify_result) == 1){
+      $sql = "SELECT * FROM subject WHERE subject_id = ".$id;
+      $result = mysqli_query($conn, $sql);
+      $row = mysqli_fetch_assoc($result);
+    }else{
+      header("location: class.php"); // in case class is not his
+    }
+  }else{
+    header("location: class.php");
+  }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -90,26 +122,19 @@
     LOGOUT</a>
   </div>
 </div>
-<?php
-  include("config.php");
-  $id = $_GET['id'];
-  $sql = "SELECT * FROM subject WHERE=" .$id;
-  $result = $conn->query("SELECT * FROM subject") or die($conn->error);
-  $row = mysqli_fetch_assoc($result);
-
-?>
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-        <form action="updateclass.php" method="post">
+        <form action=<?php echo "editclass.php?id=".$_GET['id']?> method="post">
           <fieldset>
-              <legend><h4>Rename Class</h4></legend> <br>
-                <input type="hidden" name="sub_id" required="required"  value=<?php echo $row['subject_id'] ?>>
-                <div class="w3-center"> Edit Course Name  <input type="text" name="oname" required="required" value=<?php echo $row['subject_name'] ?>></div>
-                <div class="w3-center"> Edit Course Code  <input type="text" name="cname" required="required" value=<?php echo $row['subject_code'] ?>></div>
+            <legend><h4>Rename Class</h4></legend> <br>
+            <input type="hidden" name="sub_id" required="required"  value=<?php echo $row['subject_id'] ?>>
+            <div class="w3-center"> Edit Course Name  <input type="text" name="oname" required="required" value="<?php echo $row['subject_name'] ?>"></div>
+            <div class="w3-center"> Edit Course Code  <input type="text" name="cname" required="required" value="<?php echo $row['subject_code'] ?>"></div>
+            <p class="text-center"><?php echo(isset($_SESSION['response_msg']) ? $_SESSION['response_msg'] : "");?></p>
           </fieldset> <br>
           <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
           <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button>
@@ -122,3 +147,4 @@
 
 </body>
 </html>
+<?php unset($_SESSION['response_msg']); ?>
