@@ -1,3 +1,13 @@
+<?php
+  include("config.php");
+  session_start();
+  
+  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
+    session_unset();
+    session_destroy(); // destroy any other existing sessions
+    header("location: index.php"); // redirect users back to login page
+  }
+?>
 <!DOCTYPE html>
 <html>
   <title>Class</title>
@@ -29,7 +39,7 @@
   form div + div {
     margin-top: 1em;
   }
-  
+
   input[type=text], input[type=date], input[type=tel], select, textarea {
       width: 100%;
       padding: 12px 20px;
@@ -83,12 +93,12 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <!-- Header/Home -->  
+  <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
         <form action="addrequirement.php" method="post">
           <fieldset>
-           <legend><h4>Add Requirement</h4></legend> 
+           <legend><h4>Add Requirement</h4></legend>
            <label>Select the category</label>
             <select name="Select[]" >
               <option value="quiz">Quiz</option>
@@ -102,10 +112,10 @@
               <option value=" "> </option>
               <option value=" "> </option>
               <option value=" "> </option>
-              <div class="w3-center"> Highest Possible Score <input type="text" name="hps" required="required" placeholder="Highest Possible Score"></div> 
+              <div class="w3-center"> Highest Possible Score <input type="text" name="hps" required="required" placeholder="Highest Possible Score"></div>
           </fieldset> <br>
           <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
-          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
+          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button>
         </form>
     </div>
   </header>
@@ -194,6 +204,6 @@
 //       }
 //     }
 //   }
-  
+
 // }
 ?>

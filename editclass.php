@@ -1,3 +1,13 @@
+<?php
+  include("config.php");
+  session_start();
+
+  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
+    session_unset();
+    session_destroy(); // destroy any other existing sessions
+    header("location: index.php"); // redirect users back to login page
+  }
+?>
 <!DOCTYPE html>
 <html>
   <title>Class</title>
@@ -102,7 +112,7 @@
                 <div class="w3-center"> Edit Course Code  <input type="text" name="cname" required="required" value=<?php echo $row['subject_code'] ?>></div>
           </fieldset> <br>
           <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
+          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button>
         </form>
     </div>
   </header>

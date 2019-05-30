@@ -1,3 +1,13 @@
+<?php
+  include("config.php");
+  session_start();
+
+  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
+    session_unset();
+    session_destroy(); // destroy any other existing sessions
+    header("location: index.php"); // redirect users back to login page
+  }
+?>
 <!DOCTYPE html>
 <html>
   <title>Class</title>
@@ -36,7 +46,7 @@
     margin-top:-3em;
     position: absolute
   }
-  
+
   input[type=text], input[type=date], input[type=tel], select, textarea {
       width: 100%;
       padding: 12px 20px;
@@ -89,7 +99,7 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <?php 
+  <?php
     include("config.php");
     $sql = "SELECT * FROM subject";
     $result = $conn->query("SELECT * FROM subject JOIN teacher on subject.teacher_id = teacher.teacher_id") or die($conn->error);
@@ -99,11 +109,11 @@
     // echo $row1;
   ?>
 
-  <!-- Header/Home -->  
+  <!-- Header/Home -->
   <div class="container">
     <h2>Class</h2>
     <a href='createclass.php'><button id="add" class="btn btn-primary">Add Class</button></a>
-    <div class="table-responsive">          
+    <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
@@ -117,7 +127,7 @@
         </tr>
       </thead>
       <tbody>
-          <?php 
+          <?php
             if ($result->num_rows  >  0) {
               while($row = $result->fetch_assoc()) {
                   echo "<tr>";
@@ -135,7 +145,7 @@
                        </button></a></td>";
                   echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
               }
-              
+
             }
             else {
                 echo "<tr>";

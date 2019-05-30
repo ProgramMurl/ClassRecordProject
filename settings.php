@@ -27,7 +27,7 @@
     border: 1px solid #CCC;
     border-radius: 1em;
     }
-    .fieldset-auto-width { 
+    .fieldset-auto-width {
       display: inline-block;
     }
     .form-elegant .font-small {
@@ -57,7 +57,7 @@
     #main {margin-left: 120px}
     /* Remove margins from "page content" on small screens */
     @media only screen and (max-width: 600px) {#main {margin-left: 0}}
-    
+
   </style>
 
 <body class="w3-black">
@@ -95,7 +95,7 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="a">
-  <!-- Header/Home -->  
+  <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
       <fieldset class="fieldset-auto-width">
@@ -109,13 +109,13 @@
     </div>
   </header>
 
-      <br> 
+      <br>
 
   <header class="w3-container w3-padding-32 w3-center w3-black">
     <div class="relative fullwidth col-xs-12">
       <fieldset class="fieldset-auto-width">
         <h2><span>Student Options</span><br>___________________________</h2>
-        <button id="astudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addstudent.php';">Add Student Profile</button> 
+        <button id="astudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addstudent.php';">Add Student Profile</button>
         <br>
         <button id="sstudbtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'searchstudent.php';">Search Student Profile</button>
         <br>
@@ -132,7 +132,7 @@
           <h2><span>Requirement Options</span><br>___________________________</h2>
           <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addrequirement.php';">Add (Exam/Quiz/Assignment)</button>
           <br>
-          <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deleterequirement.php';">Delete (Exam/Quiz/Assignment)</button> 
+          <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deleterequirement.php';">Delete (Exam/Quiz/Assignment)</button>
         </fieldset>
       </div>
     </header>
@@ -141,4 +141,3 @@
 
 </body>
 </html>
-
