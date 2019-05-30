@@ -135,10 +135,10 @@
                   echo "<td>".$row['subject_code']."</td>";
                   echo "<td>".$row['teacher_id']."</td>";
                   echo "<td>".$row['first_name']. " " .$row['last_name']."</td>";
-                  echo "<td>
+                  echo "<td><a href='studentlist.php'>
                        <button class='btn btn-success' value=".$row['subject_id'].">
                          <i class='fa fa-eye' aria-hidden='true'></i>
-                       </button></td>";
+                       </button></a></td>";
                   echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
                        <button class='btn btn-warning' value=".$row['subject_id'].">
                          <i class='fa fa-pencil' aria-hidden='true'></i>

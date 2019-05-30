@@ -96,47 +96,49 @@
   <?php
     include("config.php");
     $sql = "SELECT * FROM subject";
-    $result = $conn->query("SELECT * FROM subject JOIN student on subject.student_id = teacher.teacher_id") or die($conn->error);
+    // $result = $conn->query("SELECT * FROM subject JOIN student on subject.student_id = student.student_id") or die($conn->error);
   ?>
 
   <!-- Header/Home -->
   <div class="container">
     <h2>Class</h2>
     <a href='addstudent.php'><button id="add" class="btn btn-primary">Add Student</button></a>
+    <a href=' '><button id="req" class="btn btn-success">Requirement and Grades</button></a>
     <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
           <th>Student ID number</th>
           <th>Student Name</th>
-          <th>View</th>
+          <!-- supposedly to view student profile ang view-->
+          <th>View</th> 
           <th>Edit</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
           <?php
-            if ($result->num_rows  >  0) {
-              while($row = $result->fetch_assoc()) {
-                  echo "<tr>";
-                  echo "<td>".$row['id_number']."</td>";
-                  echo "<td>".$row['first_name']. " " .$row['last_name']."</td>";
-                  echo "<td>
-                       <button class='btn btn-success' value=".$row['subject_id'].">
-                         <i class='fa fa-eye' aria-hidden='true'></i>
-                       </button></td>";
-                  echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
-                       <button class='btn btn-warning' value=".$row['subject_id'].">
-                         <i class='fa fa-pencil' aria-hidden='true'></i>
-                       </button></a></td>";
-                  echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
-              }
-            }
-            else {
-                echo "<tr>";
-                echo "<h3> No student has been recorded yet.</h3>";
-            }
-            echo "</tr>";
+            // if ($result->num_rows  >  0) {
+            //   while($row = $result->fetch_assoc()) {
+            //       echo "<tr>";
+            //       echo "<td>".$row['id_number']."</td>";
+            //       echo "<td>".$row['first_name']. " " .$row['last_name']."</td>";
+            //       echo "<td>
+            //            <button class='btn btn-success' value=".$row['subject_id'].">
+            //              <i class='fa fa-eye' aria-hidden='true'></i>
+            //            </button></td>";
+            //       echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
+            //            <button class='btn btn-warning' value=".$row['subject_id'].">
+            //              <i class='fa fa-pencil' aria-hidden='true'></i>
+            //            </button></a></td>";
+            //       echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
+            //   }
+            // }
+            // else {
+            //     echo "<tr>";
+            //     echo "<h3> No student has been recorded yet.</h3>";
+            // }
+            // echo "</tr>";
           ?>
       </tbody>
     </table>
