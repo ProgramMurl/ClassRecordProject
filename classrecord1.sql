@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2019 at 02:35 PM
+-- Generation Time: May 30, 2019 at 04:30 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -105,7 +105,9 @@ CREATE TABLE `subject` (
 
 INSERT INTO `subject` (`subject_id`, `subject_name`, `subject_code`, `teacher_id`, `exam_weight`, `assignment_weight`, `quiz_weight`) VALUES
 (1, 'Web Development', 'cpe75n', 1, 0, 0, 0),
-(16, 'Data Structures', 'CpE 123', 1, 0, 0, 0);
+(16, 'Data Structures', 'CpE 123', 1, 0, 0, 0),
+(18, 'Information Management', 'IT 123', 1, 0, 0, 0),
+(22, 'Embedded Systems', 'CpE 404', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -139,7 +141,6 @@ INSERT INTO `teacher` (`teacher_id`, `first_name`, `last_name`, `username`, `ema
 --
 ALTER TABLE `requirement`
   ADD PRIMARY KEY (`requirement_id`),
-  ADD UNIQUE KEY `subject_id_2` (`subject_id`),
   ADD KEY `subject_id` (`subject_id`);
 
 --
@@ -195,7 +196,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `teacher`
