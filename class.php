@@ -1,10 +1,24 @@
 <?php
+  include('config.php');
   session_start();
 
   if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
     session_unset();
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
+  }
+
+  if(isset($_GET['id'])){
+    // verify if class is owned by user
+    $verify_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id']." AND teacher_id = ".$_SESSION['active_user_id'];
+    $verify_result = mysqli_query($conn, $verify_sql);
+
+    if(mysqli_num_rows($verify_result) == 1){
+      $sql = "DELETE FROM subject WHERE subject_id=".$_GET['id'];
+      mysqli_query($conn, $sql);
+    }
+
+    header("location: class.php");
   }
 ?>
 <!DOCTYPE html>
@@ -99,7 +113,6 @@
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <?php
-    include("config.php");
     $sql = "SELECT * FROM subject";
     $result = $conn->query("SELECT * FROM subject JOIN teacher on subject.teacher_id = teacher.teacher_id") or die($conn->error);
     // $sql1 = "SELECT * FROM teacher";
@@ -142,9 +155,8 @@
                        <button class='btn btn-warning' value=".$row['subject_id'].">
                          <i class='fa fa-pencil' aria-hidden='true'></i>
                        </button></a></td>";
-                  echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
+                  echo "<td><a href='class.php?id=".$row['subject_id']."'><button class='btn btn-danger' value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
               }
-
             }
             else {
                 echo "<tr>";
