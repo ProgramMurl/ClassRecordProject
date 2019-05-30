@@ -127,7 +127,7 @@
       <div class="container-fluid mt-4">
         <div class="row justify-content-center">
             <div class="col-auto mb-3">
-              <div class="card" style="width: 16rem;">
+              <div class="card" style="width: 20rem;">
                 <img class="card-img-top" src="resources/desk.jpg" alt="Card image cap">
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
@@ -137,7 +137,7 @@
               </div>
             </div>
             <div class="col-auto mb-3">
-              <div class="card" style="width: 16rem;">
+              <div class="card" style="width: 20rem;">
                 <img class="card-img-top" src="resources/class.jpg " alt="Card image cap">
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
@@ -147,7 +147,7 @@
               </div>
             </div>
             <div class="col-auto mb-3">
-              <div class="card" style="width: 16rem;">
+              <div class="card" style="width: 20rem;">
                 <img class="card-img-top" src="resources/test.jpg " alt="Card image cap">
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
