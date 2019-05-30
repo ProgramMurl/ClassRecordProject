@@ -126,9 +126,7 @@
 </body>
 </html>
 
-
 <?php
-	include("config.php");
 
   $idnum = 0;
   if(isset($_POST['submit'])){

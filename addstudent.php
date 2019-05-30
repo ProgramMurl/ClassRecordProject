@@ -122,70 +122,43 @@
   </header>
 <!-- END PAGE CONTENT -->
 </div>
-
-
 </body>
 </html>
-
-
 <?php
-
   $target_dir = "images/";
-
   if(isset($_POST['submit']) && !empty($_FILES["image"]["name"])){
-        $first=$_POST['fname'];
-        $last=$_POST['lname'] ;
-        $idno= $_POST['idnum'];
-        $course=$_POST['ccode'];
-        $file_name = basename($_FILES['image']['name']);
-        $file_tmp_name = $_FILES['image']['tmp_name'];
-        $temp = $target_dir."".$file_name;
-        $file_type = pathinfo($temp,PATHINFO_EXTENSION);
-         // Allow certain file formats
-        $allowTypes = array('jpg','png','jpeg','gif','pdf');
+    $first=$_POST['fname'];
+    $last=$_POST['lname'] ;
+    $idno= $_POST['idnum'];
+    $course=$_POST['ccode'];
+    $file_name = basename($_FILES['image']['name']);
+    $file_tmp_name = $_FILES['image']['tmp_name'];
+    $temp = $target_dir."".$file_name;
+    $file_type = pathinfo($temp,PATHINFO_EXTENSION);
+    // Allow certain file formats
+    $allowTypes = array('jpg','png','jpeg','gif','pdf');
 
-        if(in_array($file_type, $allowTypes)){
-          if(move_uploaded_file($file_tmp_name,$target_dir.$file_name)){
-              $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
-              $sql = "INSERT INTO student (id_number,first_name,last_name,image) VALUES ('$idno','$first', '$last','$temp')";
-               $result = mysqli_query($conn,$sql);
-              //echo "<p align=center>$temp</p>";
-              //echo "<p align=center>$result</p>";
+    if(in_array($file_type, $allowTypes)){
+      if(move_uploaded_file($file_tmp_name,$target_dir.$file_name)){
+        $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
+        $sql = "INSERT INTO student (id_number,first_name,last_name,image) VALUES ('$idno','$first', '$last','$temp')";
+        $result = mysqli_query($conn,$sql);
+        //echo "<p align=center>$temp</p>";
+        //echo "<p align=center>$result</p>";
 
-            if(mysqli_affected_rows($conn) == 1){
-              echo "<p align=center style='color:green'><b>File has been successfully uploaded</b></p>";
-            }
-            else{
-              echo "<p align=center>A system error has occured</p>".mysqli_error($conn);
-            }
-          }
-          else
-            $text = "Sorry, there was an error uploading your file.";
+        if(mysqli_affected_rows($conn) == 1){
+          echo "<p align=center style='color:green'><b>File has been successfully uploaded</b></p>";
+        }else{
+          echo "<p align=center>A system error has occured</p>".mysqli_error($conn);
         }
-        else
-          $text = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
-  }
-  else
+      }else{
+        $text = "Sorry, there was an error uploading your file.";
+      }
+    }else{
+      $text = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
+    }
+  }else{
     $text = 'Please select a file to upload.';
+  }
   echo "<p align=center>$text</p>";
-
-//     $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
-//     $idstud  = "SELECT * FROM subject";
-//     $ans = $conn->query("SELECT * FROM subject") or die($conn->error);
-//     $idsub = "SELECT * FROM student";
-//     $ans1 = $conn->query("SELECT * FROM teacher") or die($conn->error);
-//     $r = $ans1->fetch_assoc();
-
-//  while($s = $ans->fetch_assoc()){
-
-//   $rec = "INSERT INTO student_record (student_id, subject_id, final grade) VALUES (".$r['student_id'].", ".$s['subject_id'].", '0')";
-
-//   $results = mysqli_query($conn,$rec);
-//   if(mysqli_affected_rows($conn) == 1){
-//     echo "<p align=center style='color:orange'><b>Added to record</b></p>";
-//   }
-//   else{
-//     echo "<p align=center>Error has occured</p>".mysqli_error($conn);
-//   }
-// }
 ?>
