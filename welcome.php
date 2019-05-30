@@ -1,7 +1,7 @@
 <?php
   session_start();
 
-  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_id'])){
+  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
     session_unset();
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
@@ -115,8 +115,8 @@
         <div class="description">
            <h1>    Hello ,Welcome To My official Website
             <p>    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>   
-             <button class="btn btn-outline-secondary btn-lg">See more</button>  </h1>  
+            </p>
+             <button class="btn btn-outline-secondary btn-lg">See more</button>  </h1>
         </div>
       </div> -->
     <!-- </header> -->

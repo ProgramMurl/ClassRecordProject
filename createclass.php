@@ -1,3 +1,35 @@
+<?php
+  include("config.php");
+  session_start();
+
+  define('RESPONSE_1', 'Class successfully added to the database!');
+  define('RESPONSE_2', 'Error updating the database, please contact the IT administrator.');
+
+  // -- TEST SECTION
+  // test values, remove section in actual usage
+  // $_SESSION['active_user_id'] = 1;
+  // $_POST['cname'] = 'Data Structures';
+  // $_POST['ccode'] = 'CpE 123';
+  // $_POST['tname'] = 'Pena';
+  // -- END OF TEST SECTION
+
+  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
+    session_unset();
+    session_destroy(); // destroy any other existing sessions
+    header("location: index.php"); // redirect users back to login page
+  }
+
+  if(isset($_POST['cname']) && isset($_POST['ccode']) && isset($_SESSION['active_user_id'])){
+    $insert_class = "INSERT INTO subject (subject_name, subject_code, teacher_id) VALUES ('".$_POST['cname']."', '".$_POST['ccode']."', ".$_SESSION['active_user_id'].")";
+    $result = mysqli_query($conn, $insert_class);
+
+    if($result){
+      $_SESSION['response_msg'] = RESPONSE_1;
+    }else{
+      $_SESSION['response_msg'] = RESPONSE_2;
+    }
+  }
+?>
 <!DOCTYPE html>
 <html>
   <title>Class</title>
@@ -90,31 +122,22 @@
 <div class="w3-padding-large" id="main">
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
-     <div class="relative fullwidth col-xs-12">
-      	<form action="add_class.php" method="post">
-		<fieldset>
-		    <legend><h4>Create Class</h4></legend> <br>
-			<div class="w3-center"> Course Name  <input type="text" name="cname" required="required" placeholder="Course Name"> </div>
-			<div class="w3-center" > Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div>
-			<!-- <div class="w3-center"> Teacher's Name  <input type="text" name="tname" required="required" placeholder="Teacher's Surname"></div> -->
-		</fieldset> <br>
-		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button>
-		</form>
-    </div>
-  </header>
+  <div class="relative fullwidth col-xs-12">
+    <form action="createclass.php" method="post">
+      <fieldset>
+        <legend><h4>Create Class</h4></legend> <br>
+        <div class="w3-center"> Course Name  <input type="text" name="cname" required="required" placeholder="Course Name"> </div>
+        <div class="w3-center" > Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div>
+        <p class="text-center"><?php echo(isset($_SESSION['response_msg']) ? $_SESSION['response_msg'] : "");?></p>
+        <!-- <div class="w3-center"> Teacher's Name  <input type="text" name="tname" required="required" placeholder="Teacher's Surname"></div> -->
+      </fieldset> <br>
+      <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
+      <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button>
+    </form>
+  </div>
+</header>
 <!-- END PAGE CONTENT -->
 </div>
-
-
 </body>
 </html>
-
-
-<?php
-//	include("config.php");
-//	session_start();
-
-
-
-?>
+<?php unset($_SESSION['response_msg']);?>

@@ -168,9 +168,6 @@ span.psw {
   padding-top: 15px;
   padding-bottom: 15px;
 }
-#response{
-
-}
 </style>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -179,7 +176,7 @@ span.psw {
     <div class="row justify-content-md-center">
       <div class="col-md-5" id="content">
         <form method="post" action="add_user.php">
-          <p class="text-center <?php echo(isset($_SESSION['response_msg']) && ($_SESSION['response_msg'] == RESPONSE_1) ? "text-success" : "text-danger");?>" id="response"><?php echo(isset($_SESSION['response_msg']) ? $_SESSION['response_msg'] : "");?></p>
+          <p class="text-center <?php echo(isset($_SESSION['response_msg']) && ($_SESSION['response_msg'] == RESPONSE_1) ? "text-success" : "text-danger");?>"><?php echo(isset($_SESSION['response_msg']) ? $_SESSION['response_msg'] : "");?></p>
           <div class="imgcontainer">
             <img src="resources/noavatar.png" alt="Circle" class="avatar" style="width: 170px; height: 100px;">
           </div>
