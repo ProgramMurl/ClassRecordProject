@@ -1,3 +1,13 @@
+<?php
+  include("config.php");
+  session_start();
+
+  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
+    session_unset();
+    session_destroy(); // destroy any other existing sessions
+    header("location: index.php"); // redirect users back to login page
+  }
+?>
 <!DOCTYPE html>
 <html>
   <title>Class</title>
@@ -29,7 +39,7 @@
 	form div + div {
 		margin-top: 1em;
 	}
-	
+
 	input[type=text], input[type=date], input[type=tel], select, textarea {
 	  	width: 100%;
 	  	padding: 12px 20px;
@@ -83,22 +93,22 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <!-- Header/Home -->  
+  <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
       	<form action="addstudent.php" method="post" enctype="multipart/form-data">
       		<fieldset>
-            <?php 
+            <?php
               $text=" ";
-              $first=""; 
+              $first="";
               $last="";
               $idno=0;
               $course="";
             ?>
     		    <legend><h4>Add Student Profile</h4></legend> <br>
-            <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div> 
-      			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"> </div> 
-      			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" placeholder="Last Name"></div> 
+            <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" placeholder="ID number"> </div>
+      			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"> </div>
+      			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" placeholder="Last Name"></div>
             <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" placeholder="Course Code"></div><br>
       			<input type="hidden" name="size" value="1000000">
               <div>
@@ -106,7 +116,7 @@
               </div>
       		</fieldset> <br>
     		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
-    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button> 
+    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button>
     		</form>
     </div>
   </header>
@@ -123,7 +133,7 @@
   $target_dir = "images/";
 
   if(isset($_POST['submit']) && !empty($_FILES["image"]["name"])){
-        $first=$_POST['fname']; 
+        $first=$_POST['fname'];
         $last=$_POST['lname'] ;
         $idno= $_POST['idnum'];
         $course=$_POST['ccode'];
@@ -149,23 +159,23 @@
               echo "<p align=center>A system error has occured</p>".mysqli_error($conn);
             }
           }
-          else 
+          else
             $text = "Sorry, there was an error uploading your file.";
         }
-        else 
+        else
           $text = 'Sorry, only JPG, JPEG, PNG, GIF, & PDF files are allowed to upload.';
   }
   else
     $text = 'Please select a file to upload.';
   echo "<p align=center>$text</p>";
-  
+
 //     $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
 //     $idstud  = "SELECT * FROM subject";
 //     $ans = $conn->query("SELECT * FROM subject") or die($conn->error);
 //     $idsub = "SELECT * FROM student";
 //     $ans1 = $conn->query("SELECT * FROM teacher") or die($conn->error);
 //     $r = $ans1->fetch_assoc();
- 
+
 //  while($s = $ans->fetch_assoc()){
 
 //   $rec = "INSERT INTO student_record (student_id, subject_id, final grade) VALUES (".$r['student_id'].", ".$s['subject_id'].", '0')";

@@ -1,7 +1,13 @@
-<?php 
+<?php
 
   include("config.php");
+  session_start();
 
+  if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
+    session_unset();
+    session_destroy(); // destroy any other existing sessions
+    header("location: index.php"); // redirect users back to login page
+  }
   if(isset($_POST['oname']) && isset($_POST['cname']) && isset($_POST['sub_id'])){
   	$course = $_POST['oname'];
   	$code = $_POST['cname'];
