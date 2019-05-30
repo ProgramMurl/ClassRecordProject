@@ -33,6 +33,52 @@
       font-family: "Montserrat", sans-serif;
     }
 
+    .header{
+      background-image: url('resources/headerback.jpg');
+      background-attachment: fixed;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .btn{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background:#F97300;
+      color:#fff;
+    }
+
+    .description{
+      position: absolute;
+      top: 30%;
+      margin: auto;
+      padding: 2em;
+    }
+
+    .description h1{
+     color:#F97300 ;
+    }
+    .description p{
+     color:#666;
+     font-size: 20px;
+     width: 50%;
+     line-height: 1.5;
+    }
+    .description button{
+     border:1px  solid #F97300;
+     background:#F97300;
+     color:#fff;
+    }
+
+    .overlay{
+      position: absolute;
+      min-height: 100%;
+      min-width: 100%;
+      left: 0;
+      top: 0;
+      background: rgba(244, 244, 244, 0.79);
+    }
+
     .w3-row-padding img{
       margin-bottom: 12px;
     }
@@ -67,10 +113,6 @@
       <i class="fa fa-graduation-cap w3-large"></i>
       <p>CLASS</p>
     </a>
-    <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-eye w3-large"></i>
-      <p>PHOTOS</p>
-    </a>
     <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
       <i class="fa fa-cog w3-large"></i>
       <p>SETTINGS</p>
@@ -86,7 +128,6 @@
     <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
       <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
       <a href="class.php" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
-      <a href="" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
       <a href="settings.php" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
       <a href="kill_session.php" class="w3-bar-item w3-button"style="width:25% !important">LOGOUT</a>
     </div>
@@ -96,38 +137,56 @@
   <div class="w3-padding-large" id="main">
     <!-- Header/Home -->
     <header class="w3-container w3-padding-32 w3-center w3-black" id="home">
-      <br>
-      <h1 class="w3-jumbo"><span class="w3-hide-small"></span> Welcome back!</h1>
-      <!-- <img src="resources/space.png" alt="space" class="w3-image" width="1002" height="1208"> -->
-      <div class="card-deck">
-      <div class="card" style="width: 16rem;">
-        <img class="card-img-top" src="resources/mortarboard.png " alt="Card image cap">
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-        <div class="card" style="width: 16rem;">
-        <img class="card-img-top" src="resources/mortarboard.png " alt="Card image cap">
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-        <div class="card" style="width: 16rem;">
-        <img class="card-img-top" src="resources/mortarboard.png " alt="Card image cap">
-        <div class="card-body">
-          <!-- <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-
+      <!-- <div class="overlay"></div> -->
+      <div class="container">
+        <div class="description">
+           <h1>    Hello ,Welcome To My official Website
+            <p>    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>   
+             <button class="btn btn-outline-secondary btn-lg">See more</button>  </h1>  
         </div>
       </div>
     </header>
-  </div>
+      <!-- <h1 class="w3-jumbo"><span class="w3-hide-small"></span> Welcome back!</h1> -->
+      <!-- <img src="resources/space.png" alt="space" class="w3-image" width="1002" height="1208"> -->
+      <br>
+      <section id="actions">
+      <div class="container-fluid mt-4">
+        <div class="row justify-content-center">
+            <div class="col-auto mb-3">
+              <div class="card" style="width: 16rem;">
+                <img class="card-img-top" src="resources/mortarboard1.png " alt="Card image cap">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <a href="#" class="btn">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto mb-3">
+              <div class="card" style="width: 16rem;">
+                <img class="card-img-top" src="resources/mortarboard1.png " alt="Card image cap">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <a href="#" class="btn">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto mb-3">
+              <div class="card" style="width: 16rem;">
+                <img class="card-img-top" src="resources/mortarboard1.png " alt="Card image cap">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <a href="#" class="btn">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
   <!-- END PAGE CONTENT -->
 </body>
 </html>
