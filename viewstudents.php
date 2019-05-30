@@ -7,6 +7,11 @@
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
   }
+
+  if(isset($_GET['id'])){
+    $delete_sql = "DELETE FROM student WHERE student_id = ".$_GET['id'];
+    mysqli_query($conn, $delete_sql);
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -127,7 +132,7 @@
                        <button class='btn btn-warning' value=".$row['student_id'].">
                          <i class='fa fa-pencil' aria-hidden='true'></i>
                        </button></a></td>";
-                  echo "<td><a href='delete_class.php?id=".$row['student_id']."'><button class='btn btn-danger'  value='".$row['student_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
+                  echo "<td><a href='viewstudents.php?id=".$row['student_id']."'><button class='btn btn-danger'  value='".$row['student_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
               }
             }
             else {
