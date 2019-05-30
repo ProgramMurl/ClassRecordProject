@@ -92,7 +92,7 @@
   <!-- Header/Home -->  
   <div class="container">
     <h2>Class</h2>
-    <a href='createclass.php'><button id="add" class="btn btn-primary">Add Class</button></a>
+    <a href='addstudent.php'><button id="add" class="btn btn-primary">Add Student</button></a>
     <div class="table-responsive">          
     <table class="table">
       <thead>
