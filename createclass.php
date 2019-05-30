@@ -92,10 +92,6 @@
     <i class="fa fa-graduation-cap w3-large"></i>
     <p>CLASS</p>
   </a>
-  <a href="" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fa fa-eye w3-large"></i>
-    <p>PHOTOS</p>
-  </a>
   <a href="settings.php" class="w3-bar-item w3-button w3-padding-large w3-black">
     <i class="fa fa-cog w3-large"></i>
     <p>SETTINGS</p>
