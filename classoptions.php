@@ -1,10 +1,23 @@
 <?php
+  include('config.php');
   session_start();
 
   if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
     session_unset();
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
+  }
+
+  if(!isset($_GET['id'])){
+    header("location: class.php");
+  }else{
+    // verify that user is the teacher of the class
+    $verify_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id']." AND teacher_id = ".$_SESSION['active_user_id'];
+    $result = mysqli_query($conn, $verify_sql);
+
+    if(mysqli_num_rows($result) < 1){
+      header("location: class.php");
+    }
   }
 ?>
 <!DOCTYPE html>
@@ -113,7 +126,7 @@
 <div class="w3-padding-large" id="main">
   <header class="w3-container w3-padding-32 w3-center w3-black">
     <!-- <div class="simpl-btn">
-      <button type="button" class="btn btn-primary btn-lg ">Students</button> 
+      <button type="button" class="btn btn-primary btn-lg ">Students</button>
       <button type="button" class="btn btn-danger btn-lg ">Grades</button>
     </div> -->
     <div class="container-fluid mt-4">
@@ -124,7 +137,7 @@
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="studentlist.php" class="btn">Students</a>
+                  <a href="<?php echo "studentlist.php?id=".$_GET['id']?>" class="btn">Students</a>
                 </div>
               </div>
             </div>

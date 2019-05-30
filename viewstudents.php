@@ -95,7 +95,7 @@
 <div class="w3-padding-large" id="main">
   <?php
     $sql = "SELECT * FROM student";
-     $result = $conn->query($sql) or die($conn->error);
+    $result = $conn->query($sql) or die($conn->error);
   ?>
 
   <!-- Header/Home -->
@@ -123,11 +123,11 @@
                   //      <button class='btn btn-success' value=".$row['subject_id'].">
                   //        <i class='fa fa-eye' aria-hidden='true'></i>
                   //      </button></td>";
-                  echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
-                       <button class='btn btn-warning' value=".$row['subject_id'].">
+                  echo "<td><a href='updatestudent.php?id=".$row['student_id']."'>
+                       <button class='btn btn-warning' value=".$row['student_id'].">
                          <i class='fa fa-pencil' aria-hidden='true'></i>
                        </button></a></td>";
-                  echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
+                  echo "<td><a href='delete_class.php?id=".$row['student_id']."'><button class='btn btn-danger'  value='".$row['student_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
               }
             }
             else {

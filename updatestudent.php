@@ -2,10 +2,34 @@
   include("config.php");
   session_start();
 
+  define('RESPONSE_1', 'User successfully updated in the database!');
+  define('RESPONSE_2', 'Error updating the database, please contact the IT administrator.');
+
   if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
     session_unset();
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
+  }
+
+  if(isset($_POST['idnum']) && isset($_POST['fname']) && isset($_POST['lname'])){
+    $update_sql = "UPDATE student SET id_number = '".$_POST['idnum']."', first_name = '".$_POST['fname']."', last_name = '".$_POST['lname']."' WHERE student_id = ".$_GET['id'];
+    $result = mysqli_query($conn, $update_sql);
+    if($result){
+      $_SESSION['response_msg'] = RESPONSE_1;
+    }else{
+      $_SEESION['response_msg'] = RESPONSE_2;
+    }
+  }
+
+  if(isset($_GET['id'])){
+    $sql = "SELECT * FROM student WHERE student_id = ".$_GET['id'];
+    $result = mysqli_query($conn, $sql);
+
+    if($result){
+      $row = mysqli_fetch_assoc($result);
+    }
+  }else{
+    header("location: viewstudents.php");
   }
 ?>
 <!DOCTYPE html>
@@ -101,35 +125,25 @@
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="updatestudent.php" method="post">
-		<fieldset>
-		    <legend><h4>Update Student Profile</h4></legend> <br>
-        <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" > </div>
-  			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" > </div>
-  			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" ></div>
-        <div class="w3-center"> Course Code  <input type="text" name="ccode" required="required" ></div><br>
-  			<input type="hidden" name="size" value="1000000">
-          <div>
-            <input type="file" name="image">
-          </div>
-		</fieldset> <br>
-		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button>
-		</form>
+      	<form action="<?php echo "updatestudent.php?id=".$_GET['id']?>" method="post">
+      		<fieldset>
+    		    <legend><h4>Update Student Profile</h4></legend> <br>
+            <div class="w3-center"> ID number  <input type="text" name="idnum" required="required" value="<?php echo $row['id_number']?>"> </div>
+      			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" value="<?php echo $row['first_name']?>"> </div>
+      			<div class="w3-center"> Last Name  <input type="text" name="lname" required="required" value="<?php echo $row['last_name']?>"></div>
+      			<input type="hidden" name="size" value="1000000">
+            <div>
+              <input type="file" name="image">
+            </div>
+            <p class="text-center"><?php echo(isset($_SESSION['response_msg']) ? $_SESSION['response_msg'] : "");?></p>
+      		</fieldset> <br>
+      		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
+      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'viewstudents.php';">Back</button>
+        </form>
     </div>
   </header>
 <!-- END PAGE CONTENT -->
 </div>
-
-
 </body>
 </html>
-
-
-<?php
-//	include("config.php");
-//	session_start();
-
-
-
-?>
+<?php unset($_SESSION['response_msg']); ?>
