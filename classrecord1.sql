@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.8.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 30, 2019 at 02:30 PM
--- Server version: 10.1.38-MariaDB
--- PHP Version: 5.6.40
+-- Generation Time: May 30, 2019 at 02:35 PM
+-- Server version: 10.1.35-MariaDB
+-- PHP Version: 7.2.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -104,7 +104,8 @@ CREATE TABLE `subject` (
 --
 
 INSERT INTO `subject` (`subject_id`, `subject_name`, `subject_code`, `teacher_id`, `exam_weight`, `assignment_weight`, `quiz_weight`) VALUES
-(1, 'Web Development', 'cpe75n', 1, 0, 0, 0);
+(1, 'Web Development', 'cpe75n', 1, 0, 0, 0),
+(16, 'Data Structures', 'CpE 123', 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -166,7 +167,6 @@ ALTER TABLE `student_record`
 --
 ALTER TABLE `subject`
   ADD PRIMARY KEY (`subject_id`),
-  ADD UNIQUE KEY `teacher_id_2` (`teacher_id`),
   ADD KEY `teacher_id` (`teacher_id`);
 
 --
@@ -195,7 +195,7 @@ ALTER TABLE `student`
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `teacher`
