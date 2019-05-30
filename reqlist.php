@@ -1,5 +1,5 @@
 <?php
-  include('config.php');
+  include("config.php");
   session_start();
 
   if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
@@ -7,22 +7,18 @@
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
   }
+  // if(!isset($_GET['id'])){
+  //   header('location: classoptions.php');
+  // }
 
-  if(!isset($_GET['id'])){
-    header("location: class.php");
-  }else{
-    // verify that user is the teacher of the class
-    $verify_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id']." AND teacher_id = ".$_SESSION['active_user_id'];
-    $result = mysqli_query($conn, $verify_sql);
-
-    if(mysqli_num_rows($result) < 1){
-      header("location: class.php");
-    }
-  }
+  // if(isset($_GET['student_id'])){
+  //   $delete_sql = "DELETE FROM student_record WHERE student_id = ".$_GET['student_id'];
+  //   mysqli_query($conn, $delete_sql);
+  // }
 ?>
 <!DOCTYPE html>
 <html>
-  <title>Class</title>
+  <title>Requirements</title>
   <meta charset="UTF-8">
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -33,10 +29,9 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <style>
     body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
@@ -52,24 +47,6 @@
     }
   form div + div {
     margin-top: 1em;
-  }
-  .btn{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:#299e30;
-      color:#fff;
-    }
-
-    .card{
-       background-color: #1f2530;
-    }
-
-  #add{
-    margin-left: 70em;
-    margin-bottom: 2em;
-    margin-top:-3em;
-    position: absolute
   }
 
   input[type=text], input[type=date], input[type=tel], select, textarea {
@@ -124,49 +101,60 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <header class="w3-container w3-padding-32 w3-center w3-black">
-    <!-- <div class="simpl-btn">
-      <button type="button" class="btn btn-primary btn-lg ">Students</button>
-      <button type="button" class="btn btn-danger btn-lg ">Grades</button>
-    </div> -->
-    <div class="container-fluid mt-4">
-        <div class="row justify-content-center">
-            <div class="col-auto mb-3">
-              <div class="card" style="width: 24rem;">
-                <img class="card-img-top" src="resources/students.jpg" alt="students">
-                <div class="card-body">
-                  <!-- <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="<?php echo "studentlist.php?id=".$_GET['id']?>" class="btn">Students</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-auto mb-3">
-              <div class="card" style="width: 24rem;">
-                <img class="card-img-top" src="resources/grades.jpeg " alt="test">
-                <div class="card-body">
-                  <!-- <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="reqlist.php" class="btn">Requirements</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-auto mb-3">
-              <div class="card" style="width: 24rem;">
-                <img class="card-img-top" src="resources/submitgrade.jpg " alt="test">
-                <div class="card-body">
-                  <!-- <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="submitgrade.php" class="btn">Submit Grades</a>
-                </div>
-              </div>
-            </div>
-        </div>
-        <a href="class.php"><button class="btn-danger btn-lg w3-center">Back</button></a>
-      </div>
-  </header>
-</div>
-<!-- END PAGE CONTENT -->
+  <?php
+    // $sql = "SELECT * FROM requirement";
+    // $result = $conn->query($sql) or die($conn->error);
+  ?>
 
+  <!-- Header/Home -->
+  <div class="container">
+    <h2>Requirements of <?php
+      // $class_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id'];
+      // $class_result = mysqli_query($conn, $class_sql);
+      // $row = mysqli_fetch_assoc($class_result);
+      // echo $row['subject_code']." - ".$row['subject_name'];
+    ?></h2>
+    <a href='addreqrecord.php'><button id="add" class="btn w3-deep-orange">Add Requirement</button> </a>
+    <button id="back" class="btn w3-dark-gray" onClick="Javascript:window.location.href= 'classoptions.php';">Back</button>
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Student ID</th>
+          <th>Requirement Name</th>
+          <th>Total Score</th>
+          <th>Student Score</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+          <?php
+            // if ($result->num_rows  >  0) {
+            //   while($row = $result->fetch_assoc()) {
+            //       echo "<tr>";
+            //       echo "<td>".$row['requirement_type']."</td>";
+            //       echo "<td>".$row['requirement_name']."</td>";
+            //       echo "<td>".$row['requirement_description']."</td>";
+            //       echo "<td>".$row['total_score']."</td>";
+            //       echo "<td><a href='updatestudent.php?id=".$row['student_id']."'>
+            //            <button class='btn btn-warning' value=".$row['student_id'].">
+            //              <i class='fa fa-pencil' aria-hidden='true'></i>
+            //            </button></a></td>";
+            //       echo "<td><a href='delete_class.php?id=".$row['student_id']."'><button class='btn btn-danger'  value='".$row['student_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
+            //   }
+            // }
+            // else {
+            //     echo "<tr>";
+            //      echo "<h3> No student has been recorded yet.</h3>";
+            // }
+            // echo "</tr>";
+          ?>
+      </tbody>
+    </table>
+    </div>
+  </div>
+<!-- END PAGE CONTENT -->
+</div>
 </body>
 </html>

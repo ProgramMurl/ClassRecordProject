@@ -1,6 +1,9 @@
 <?php
-  include('config.php');
+  include("config.php");
   session_start();
+
+  define('RESPONSE_1', 'Requirement successfully added to the database!');
+  define('RESPONSE_2', 'Error updating the database, please contact the IT administrator.');
 
   if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
     session_unset();
@@ -8,15 +11,14 @@
     header("location: index.php"); // redirect users back to login page
   }
 
-  if(!isset($_GET['id'])){
-    header("location: class.php");
-  }else{
-    // verify that user is the teacher of the class
-    $verify_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id']." AND teacher_id = ".$_SESSION['active_user_id'];
-    $result = mysqli_query($conn, $verify_sql);
-
-    if(mysqli_num_rows($result) < 1){
-      header("location: class.php");
+  if(isset($_POST['requirement_type']) && isset($_POST['rname']) && isset($_POST['rdesc']) && isset($_POST['subject_id']) && isset($_POST['hps'])){
+    // insert query
+    $insert_sql = "INSERT INTO requirement (subject_id, requirement_type, requirement_name, requirement_description, total_score) VALUES (".$_POST['subject_id'].", '".$_POST['requirement_type']."', '".$_POST['rname']."', '".$_POST['rdesc']."', ".$_POST['hps'].")";
+    $result = mysqli_query($conn, $insert_sql);
+    if($result){
+      $_SESSION['response_msg'] = RESPONSE_1;
+    }else{
+      $_SESSION['response_msg'] = RESPONSE_2;
     }
   }
 ?>
@@ -33,10 +35,7 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
 
   <style>
     body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
@@ -50,26 +49,9 @@
     border-radius: 1em;
     display: inline-block;
     }
+
   form div + div {
     margin-top: 1em;
-  }
-  .btn{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background:#299e30;
-      color:#fff;
-    }
-
-    .card{
-       background-color: #1f2530;
-    }
-
-  #add{
-    margin-left: 70em;
-    margin-bottom: 2em;
-    margin-top:-3em;
-    position: absolute
   }
 
   input[type=text], input[type=date], input[type=tel], select, textarea {
@@ -89,6 +71,7 @@
     /* Remove margins from "page content" on small screens */
     @media only screen and (max-width: 600px) {#main {margin-left: 0}}
     </style>
+
 <body class="w3-black">
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
@@ -124,49 +107,42 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
+  <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
-    <!-- <div class="simpl-btn">
-      <button type="button" class="btn btn-primary btn-lg ">Students</button>
-      <button type="button" class="btn btn-danger btn-lg ">Grades</button>
-    </div> -->
-    <div class="container-fluid mt-4">
-        <div class="row justify-content-center">
-            <div class="col-auto mb-3">
-              <div class="card" style="width: 24rem;">
-                <img class="card-img-top" src="resources/students.jpg" alt="students">
-                <div class="card-body">
-                  <!-- <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="<?php echo "studentlist.php?id=".$_GET['id']?>" class="btn">Students</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-auto mb-3">
-              <div class="card" style="width: 24rem;">
-                <img class="card-img-top" src="resources/grades.jpeg " alt="test">
-                <div class="card-body">
-                  <!-- <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="reqlist.php" class="btn">Requirements</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-auto mb-3">
-              <div class="card" style="width: 24rem;">
-                <img class="card-img-top" src="resources/submitgrade.jpg " alt="test">
-                <div class="card-body">
-                  <!-- <h5 class="card-title">Card title</h5>
-                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="submitgrade.php" class="btn">Submit Grades</a>
-                </div>
-              </div>
-            </div>
-        </div>
-        <a href="class.php"><button class="btn-danger btn-lg w3-center">Back</button></a>
-      </div>
-  </header>
-</div>
-<!-- END PAGE CONTENT -->
+     <div class="relative fullwidth col-xs-12">
+        <form action="addrequirement.php" method="post">
+          <fieldset>
+           <legend><h4>Add Requirement</h4></legend>
+           <label>Select the category</label>
+            <select name="requirement_type">
+              <option value="quiz">Quiz</option>
+              <option value="exam">Exam</option>
+              <option value="assigment">Assignment</option>
+            </select><br>
+            <div class="w3-center">Requirement Name<input type="text" name="rname" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div>
+            <div class="w3-center">Requirement Description<input type="text" name="rdesc" required="required" placeholder="e.g Exam for Chapter 1"> </div>
+            <label>Select subject</label>
+            <select name="subject_id">
+              <?php
+                // query the list of subjects taught by the professor
+                $query_sql = "SELECT * FROM subject WHERE teacher_id = ".$_SESSION['active_user_id'];
+                $result = mysqli_query($conn, $query_sql);
 
+                while($row = mysqli_fetch_assoc($result)){
+                  echo "<option value='".$row['subject_id']."'>".$row['subject_code']." - ".$row['subject_name']."</option>";
+                }
+              ?>
+            </select>
+            <div class="w3-center"> Highest Possible Score <input type="text" name="hps" required="required" placeholder="Highest Possible Score (Total Score)"></div>
+            <p class="text-center"><?php echo(isset($_SESSION['response_msg']) ? $_SESSION['response_msg'] : "");?></p>
+          </fieldset> <br>
+          <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
+          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'reqlist.php?id=<?php echo $_GET['id']?>';">Back</button>
+        </form>
+    </div>
+  </header>
+<!-- END PAGE CONTENT -->
+</div>
 </body>
 </html>
+<?php unset($_SESSION['response_msg'])?>
