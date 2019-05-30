@@ -11,6 +11,11 @@
   if(!isset($_GET['id'])){
     header('location: classoptions.php');
   }
+
+  if(isset($_GET['student_id'])){
+    $delete_sql = "DELETE FROM student_record WHERE student_id = ".$_GET['student_id'];
+    mysqli_query($conn, $delete_sql);
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -97,14 +102,14 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <?php
-    $sql = "SELECT * FROM subject";
-    // $result = $conn->query("SELECT * FROM subject JOIN student on subject.student_id = student.student_id") or die($conn->error);
-  ?>
-
   <!-- Header/Home -->
   <div class="container">
-    <h2>Students</h2>
+    <h2>Students of <?php
+      $class_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id'];
+      $class_result = mysqli_query($conn, $class_sql);
+      $row = mysqli_fetch_assoc($class_result);
+      echo $row['subject_code']." - ".$row['subject_name'];
+    ?></h2>
     <a href='addstudentrecord.php?id=<?php echo $_GET['id']?>'><button id="add" class="btn w3-purple">Add Student</button></a>
     <div class="table-responsive">
     <table class="table">
@@ -112,34 +117,27 @@
         <tr>
           <th>Student ID number</th>
           <th>Student Name</th>
-          <th>Edit</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
-          <?php
-            // if ($result->num_rows  >  0) {
-            //   while($row = $result->fetch_assoc()) {
-            //       echo "<tr>";
-            //       echo "<td>".$row['id_number']."</td>";
-            //       echo "<td>".$row['first_name']. " " .$row['last_name']."</td>";
-            //       echo "<td>
-            //            <button class='btn btn-success' value=".$row['subject_id'].">
-            //              <i class='fa fa-eye' aria-hidden='true'></i>
-            //            </button></td>";
-            //       echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
-            //            <button class='btn btn-warning' value=".$row['subject_id'].">
-            //              <i class='fa fa-pencil' aria-hidden='true'></i>
-            //            </button></a></td>";
-            //       echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
-            //   }
-            // }
-            // else {
-            //     echo "<tr>";
-                 echo "<h3> No student has been recorded yet.</h3>";
-            // }
-            // echo "</tr>";
-          ?>
+        <?php
+          $sql = "SELECT * FROM student_record JOIN student ON student.student_id = student_record.student_id WHERE subject_id = ".$_GET['id'];
+          $result = mysqli_query($conn, $sql);
+          if ($result->num_rows  >  0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<tr>";
+                echo "<td>".$row['id_number']."</td>";
+                echo "<td>".$row['first_name']. " " .$row['last_name']."</td>";
+                echo "<td><a href='studentlist.php?id=".$_GET['id']."&student_id=".$row['student_id']."'><button class='btn btn-danger' value='".$_GET['id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
+            }
+          }
+          else {
+              echo "<tr>";
+              echo "<h3> No student has been recorded yet.</h3>";
+          }
+          echo "</tr>";
+        ?>
       </tbody>
     </table>
     </div>

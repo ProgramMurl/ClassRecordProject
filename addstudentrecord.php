@@ -118,11 +118,11 @@
             <label>Select student</label>
             <select name="student_id">
               <?php
-                $sql = "SELECT first_name, last_name, id_number, student.student_id AS id FROM student LEFT JOIN student_record ON student.student_id = student_record.student_id WHERE student_record.student_id IS NULL";
+                $sql = "SELECT * FROM student";
                 $result = mysqli_query($conn, $sql);
 
                 while($row = mysqli_fetch_assoc($result)){
-                  echo "<option value='".$row['id']."'>".$row['id_number']." - ".$row['first_name']." ".$row['last_name']."</option>";
+                  echo "<option value='".$row['student_id']."'>".$row['id_number']." - ".$row['first_name']." ".$row['last_name']."</option>";
                 }
               ?>
             </select><br>
