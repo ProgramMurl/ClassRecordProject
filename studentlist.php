@@ -94,24 +94,20 @@
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
   <?php
-    include("config.php");
     $sql = "SELECT * FROM subject";
     // $result = $conn->query("SELECT * FROM subject JOIN student on subject.student_id = student.student_id") or die($conn->error);
   ?>
 
   <!-- Header/Home -->
   <div class="container">
-    <h2>Class</h2>
-    <a href='addstudent.php'><button id="add" class="btn btn-primary">Add Student</button></a>
-    <a href=' '><button id="req" class="btn btn-success">Requirement and Grades</button></a>
+    <h2>Students</h2>
+    <a href='addstudent.php'><button id="add" class="btn w3-purple">Add Student</button></a>
     <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
           <th>Student ID number</th>
           <th>Student Name</th>
-          <!-- supposedly to view student profile ang view-->
-          <th>View</th> 
           <th>Edit</th>
           <th>Delete</th>
         </tr>
@@ -136,7 +132,7 @@
             // }
             // else {
             //     echo "<tr>";
-            //     echo "<h3> No student has been recorded yet.</h3>";
+                 echo "<h3> No student has been recorded yet.</h3>";
             // }
             // echo "</tr>";
           ?>
