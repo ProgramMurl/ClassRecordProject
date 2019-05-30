@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <title>Class</title>
+  <title>Student List</title>
   <meta charset="UTF-8">
 
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -11,7 +11,9 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
   <style>
     body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
@@ -25,7 +27,6 @@
     border-radius: 1em;
     display: inline-block;
     }
-
   form div + div {
     margin-top: 1em;
   }
@@ -47,7 +48,6 @@
     /* Remove margins from "page content" on small screens */
     @media only screen and (max-width: 600px) {#main {margin-left: 0}}
     </style>
-
 <body class="w3-black">
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
@@ -80,35 +80,60 @@
     LOGOUT</a>
   </div>
 </div>
-<?php
-  include("config.php");
-  $id = $_GET['id'];
-  $sql = "SELECT * FROM subject WHERE=" .$id;
-  $result = $conn->query("SELECT * FROM subject") or die($conn->error);
-  $row = mysqli_fetch_assoc($result);
-
-?>
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
+  <?php
+    include("config.php");
+    $sql = "SELECT * FROM subject";
+    $result = $conn->query("SELECT * FROM subject JOIN student on subject.student_id = teacher.teacher_id") or die($conn->error);
+  ?>
+
   <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3-black">
-     <div class="relative fullwidth col-xs-12">
-        <form action="updateclass.php" method="post">
-          <fieldset>
-              <legend><h4>Rename Class</h4></legend> <br>
-                <input type="hidden" name="sub_id" required="required"  value=<?php echo $row['subject_id'] ?>>
-                <div class="w3-center"> Edit Course Name  <input type="text" name="oname" required="required" value=<?php echo $row['subject_name'] ?>></div>
-                <div class="w3-center"> Edit Course Code  <input type="text" name="cname" required="required" value=<?php echo $row['subject_code'] ?>></div>
-          </fieldset> <br>
-          <input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-          <button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button> 
-        </form>
+  <div class="container">
+    <h2>Class</h2>
+    <a href='addstudent.php'><button id="add" class="btn btn-primary">Add Student</button></a>
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Student ID number</th>
+          <th>Student Name</th>
+          <th>View</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+          <?php
+            if ($result->num_rows  >  0) {
+              while($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>".$row['id_number']."</td>";
+                  echo "<td>".$row['first_name']. " " .$row['last_name']."</td>";
+                  echo "<td>
+                       <button class='btn btn-success' value=".$row['subject_id'].">
+                         <i class='fa fa-eye' aria-hidden='true'></i>
+                       </button></td>";
+                  echo "<td><a href='editclass.php?id=".$row['subject_id']."'>
+                       <button class='btn btn-warning' value=".$row['subject_id'].">
+                         <i class='fa fa-pencil' aria-hidden='true'></i>
+                       </button></a></td>";
+                  echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
+              }
+
+            }
+            else {
+                echo "<tr>";
+                echo "<h3> No student has been recorded yet.</h3>";
+            }
+            echo "</tr>";
+          ?>
+      </tbody>
+    </table>
     </div>
-  </header>
+  </div>
 <!-- END PAGE CONTENT -->
 </div>
-
-
 </body>
 </html>
