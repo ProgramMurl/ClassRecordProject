@@ -57,35 +57,7 @@
     #main {margin-left: 120px}
     /* Remove margins from "page content" on small screens */
     @media only screen and (max-width: 600px) {#main {margin-left: 0}}
-    /* The Modal (background) */
-    /*.modal {
-      display: none; /* Hidden by default 
-      position: fixed; /* Stay in place 
-      z-index: 1; /* Sit on top 
-      padding-top: 100px; /* Location of the box 
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width 
-      height: 100%; /* Full height 
-      overflow: auto; /* Enable scroll if needed 
-      background-color: rgb(0,0,0); /* Fallback color 
-      background-color: rgba(0,0,0,0.4); /* Black w/ opacity 
-    }
-
-    /* Modal Content */
-    /*.modal-content {
-      position: relative;
-      background-color: #fefefe;
-      margin: auto;
-      padding: 0;
-      border: 1px solid #888;
-      width: 80%;
-      box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
-      -webkit-animation-name: animatetop;
-      -webkit-animation-duration: 0.4s;
-      animation-name: animatetop;
-      animation-duration: 0.4s
-    }*/
+    
   </style>
 
 <body class="w3-black">
@@ -115,7 +87,6 @@
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
     <a href="#home" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="class.php" class="w3-bar-item w3-button" style="width:25% !important">CLASS</a>
-    <a href="" class="w3-bar-item w3-button" style="width:25% !important">PHOTOS</a>
     <a href="settings.php" class="w3-bar-item w3-button" style="width:25% !important">SETTINGS</a>
     <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
     LOGOUT</a>
@@ -159,9 +130,7 @@
       <div class="relative fullwidth col-xs-12">
         <fieldset class="fieldset-auto-width">
           <h2><span>Requirement Options</span><br>___________________________</h2>
-          <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addrequirement.php';">Add (Exam/Quiz/Assignment)</button><!--  
-          <br>
-          <button id="uebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'updaterequirement.php';">Update (Exam/Quiz/Assignment)</button>  -->
+          <button id="aebtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'addrequirement.php';">Add (Exam/Quiz/Assignment)</button>
           <br>
           <button id="debtn" class="w3-button w3-wide w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'deleterequirement.php';">Delete (Exam/Quiz/Assignment)</button> 
         </fieldset>
