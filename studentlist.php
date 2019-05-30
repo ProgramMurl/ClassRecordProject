@@ -121,7 +121,6 @@
                        </button></a></td>";
                   echo "<td><a href='delete_class.php?id=".$row['subject_id']."'><button class='btn btn-danger'  value='".$row['subject_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
               }
-
             }
             else {
                 echo "<tr>";
