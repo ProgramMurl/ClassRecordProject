@@ -137,7 +137,7 @@
             }
             else {
                 echo "<tr>";
-                 echo "<h3> No student has been recorded yet.</h3>";
+                echo "<h3> No student has been recorded yet.</h3>";
             }
             echo "</tr>";
           ?>

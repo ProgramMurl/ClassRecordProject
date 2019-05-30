@@ -116,7 +116,7 @@
               </div>
       		</fieldset> <br>
     		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
-    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'classoptions.php';">Back</button>
+    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'viewstudents.php';">Back</button>
     		</form>
     </div>
   </header>
@@ -130,7 +130,7 @@
     $first=$_POST['fname'];
     $last=$_POST['lname'] ;
     $idno= $_POST['idnum'];
-    
+
     $file_name = basename($_FILES['image']['name']);
     $file_tmp_name = $_FILES['image']['tmp_name'];
     $temp = $target_dir."".$file_name;

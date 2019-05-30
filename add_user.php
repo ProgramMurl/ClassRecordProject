@@ -204,7 +204,7 @@ span.psw {
             <div class="row justify-content-md-center">
               <button class="btn btn-primary" name="sign_up" type="submit">Sign Up</button>
               <span>&nbsp;</span>
-              <button class="btn btn-danger" name="back" onClick="window.location.href= 'index.php';">Back</button>
+              <button class="btn btn-danger" name="back" onClick="window.location.href= 'viewstudents.php';">Back</button>
             </div>
           </div>
         </form>

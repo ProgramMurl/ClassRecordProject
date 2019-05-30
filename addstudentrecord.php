@@ -7,6 +7,15 @@
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
   }
+
+  if(!isset($_GET['id'])){
+    header("location: classoptions.php");
+  }
+
+  if(isset($_POST['student_id'])){
+    $insert_sql = "INSERT INTO student_record (student_id, subject_id, final_grade) VALUES (".$_POST['student_id'].", ".$_GET['id'].", 0.0)";
+    mysqli_query($conn, $insert_sql);
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -96,7 +105,7 @@
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="addstudent.php" method="post" enctype="multipart/form-data">
+      	<form action="addstudentrecord.php?id=<?php echo $_GET['id']?>" method="post" enctype="multipart/form-data">
       		<fieldset>
             <?php
               $text=" ";
@@ -107,13 +116,18 @@
             ?>
     		    <legend><h4>Add Student to Class</h4></legend> <br>
             <label>Select student</label>
-            <select name="listofstudents">
-              <option value=" "> </option>
-              <option value=" "> </option>
-              <option value=" "> </option>
+            <select name="student_id">
+              <?php
+                $sql = "SELECT first_name, last_name, id_number, student.student_id AS id FROM student LEFT JOIN student_record ON student.student_id = student_record.student_id WHERE student_record.student_id IS NULL";
+                $result = mysqli_query($conn, $sql);
+
+                while($row = mysqli_fetch_assoc($result)){
+                  echo "<option value='".$row['id']."'>".$row['id_number']." - ".$row['first_name']." ".$row['last_name']."</option>";
+                }
+              ?>
             </select><br>
     		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
-    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'settings.php';">Back</button>
+    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'studentlist.php?id=<?php echo $_GET['id']?>';">Back</button>
     		</form>
     </div>
   </header>
@@ -122,7 +136,7 @@
 </body>
 </html>
 <?php
-  
+
   if(isset($_POST['submit'])){
 
     $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
