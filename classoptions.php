@@ -139,7 +139,7 @@
               </div>
             </div>
         </div>
-        <a href="class.php"><button class="btn-danger btn-sm w3-center">Back</button></a>
+        <a href="class.php"><button class="btn-danger btn-lg w3-center">Back</button></a>
       </div>
   </header>
 </div>
