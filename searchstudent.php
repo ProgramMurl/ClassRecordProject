@@ -110,8 +110,8 @@
       	<form action="searchstudent.php" method="post">
       		<fieldset>
       		    <legend><h4>Search Student Profile</h4></legend> <br>
-        			<div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"></div>
-              <div class="w3-center"> Last Name   <input type="text" name="lname" required="required" placeholder="Last Name" ></div> <br>
+        			<!-- <div class="w3-center"> First Name  <input type="text" name="fname" required="required" placeholder="First Name"></div>
+              <div class="w3-center"> Last Name   <input type="text" name="lname" required="required" placeholder="Last Name" ></div> <br> -->
               <div class="w3-center"> Student ID number  <input type="text" name="idnum" required="required" placeholder="Student ID number"> </div>
       		</fieldset> <br>
       		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
@@ -131,6 +131,8 @@
   $idnum = 0;
   if(isset($_POST['submit'])){
   $idnum = $_POST['idnum'];
+  // $fname = $_POST['fname'];
+  // $lname = $_POST['lname'];
   $sql="SELECT * FROM Student
          WHERE id_number = $idnum ";
 
@@ -142,8 +144,9 @@
       exit();
    }
    while($row = mysqli_fetch_array($result1)){
-      echo "<br/> <center> Student ID: ".$row["id_number"]." Student Name: ".$row["first_name"]." ".$row["last_name"]."</center>";
-      echo "<img src ='".$row['image']."' align='center' max-width='50%'>";
+      echo "<br/> <center> Student ID: ".$row["id_number"]."";
+      echo "<br/>Student Name: ".$row["first_name"]." ".$row["last_name"]."";
+      echo "<br/><img src ='".$row['image']."' align='center' max-width='50%'></center>";
    }
 }
 
