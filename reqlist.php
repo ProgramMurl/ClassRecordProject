@@ -120,7 +120,7 @@
         <tr>
           <th>Requirement Type</th>
           <th>Requirement Name</th>
-          <th>Total Score</th>
+          <th>Total Score</th> 
           <th>Edit</th>
           <th>Delete</th>
         </tr>
