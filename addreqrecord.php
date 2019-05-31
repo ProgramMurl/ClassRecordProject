@@ -11,12 +11,25 @@
     header("location: index.php"); // redirect users back to login page
   }
 
+  if(!isset($_GET['id'])){
+    header("location: class.php");
+  }
+
   if(isset($_POST['requirement_type']) && isset($_POST['rname']) && isset($_POST['rdesc']) && isset($_POST['subject_id']) && isset($_POST['hps'])){
     // insert query
     $insert_sql = "INSERT INTO requirement (subject_id, requirement_type, requirement_name, requirement_description, total_score) VALUES (".$_POST['subject_id'].", '".$_POST['requirement_type']."', '".$_POST['rname']."', '".$_POST['rdesc']."', ".$_POST['hps'].")";
     $result = mysqli_query($conn, $insert_sql);
+    $requirement_id = mysqli_insert_id($conn);
     if($result){
       $_SESSION['response_msg'] = RESPONSE_1;
+      $query = "SELECT student_id FROM student_record WHERE subject_id = ".$_GET['id'];
+      $result = mysqli_query($conn, $query);
+      if($result){
+        while($row = mysqli_fetch_assoc($result)){
+          $add_record = "INSERT INTO requirement_record (requirement_id, student_id, score, grade) VALUES (".$requirement_id.", ".$row['student_id'].", 0, 0)";
+          mysqli_query($conn, $add_record);
+        }
+      }
     }else{
       $_SESSION['response_msg'] = RESPONSE_2;
     }
@@ -110,7 +123,7 @@
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-        <form action="addrequirement.php" method="post">
+        <form action="addreqrecord.php?id=<?php echo $_GET['id']?>" method="post">
           <fieldset>
            <legend><h4>Add Requirement</h4></legend>
            <label>Select the category</label>

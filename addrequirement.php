@@ -15,8 +15,10 @@
     // insert query
     $insert_sql = "INSERT INTO requirement (subject_id, requirement_type, requirement_name, requirement_description, total_score) VALUES (".$_POST['subject_id'].", '".$_POST['requirement_type']."', '".$_POST['rname']."', '".$_POST['rdesc']."', ".$_POST['hps'].")";
     $result = mysqli_query($conn, $insert_sql);
+    $requirement_id = mysqli_insert_id($conn);
     if($result){
       $_SESSION['response_msg'] = RESPONSE_1;
+      // make sure all existing students get the requirement
     }else{
       $_SESSION['response_msg'] = RESPONSE_2;
     }
