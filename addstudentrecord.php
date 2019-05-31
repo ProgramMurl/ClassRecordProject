@@ -15,6 +15,7 @@
   if(isset($_POST['student_id'])){
     $insert_sql = "INSERT INTO student_record (student_id, subject_id, final_grade) VALUES (".$_POST['student_id'].", ".$_GET['id'].", 0.0)";
     mysqli_query($conn, $insert_sql);
+    header("location: studentlist.php?id=".$_GET['id']);
   }
 ?>
 <!DOCTYPE html>
