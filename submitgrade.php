@@ -16,6 +16,14 @@
     $insert_sql = "INSERT INTO student_record (student_id, subject_id, final_grade) VALUES (".$_POST['student_id'].", ".$_GET['id'].", 0.0)";
     mysqli_query($conn, $insert_sql);
   }
+
+  if(isset($_POST['submit'])){
+
+    $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
+    // $sql = "INSERT INTO student (id_number,first_name,last_name,image) VALUES ('$idno','$first', '$last','$temp')";
+    $result = mysqli_query($conn,$sql);
+
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -30,6 +38,10 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
 
 
   <style>
@@ -102,46 +114,57 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3-black">
-     <div class="relative fullwidth col-xs-12">
-      	<form action="addstudentrecord.php?id=<?php echo $_GET['id']?>" method="post" enctype="multipart/form-data">
-      		<fieldset>
-            <?php
-              $text=" ";
-              $first="";
-              $last="";
-              $idno=0;
-              $course="";
-            ?>
-    		    <legend><h4>Add Grade for Student</h4></legend> <br>
-            <label>Select student</label>
-            <select name="student_id">
-              <?php
-                $sql = "SELECT * FROM student";
-                $result = mysqli_query($conn, $sql);
 
-                while($row = mysqli_fetch_assoc($result)){
-                  echo "<option value='".$row['student_id']."'>".$row['id_number']." - ".$row['first_name']." ".$row['last_name']."</option>";
-                }
-              ?>
-            </select><br>
-    		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit" onClick="return confirm('Are you sure?')">
-    		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'classoptions.php?id=<?php echo $_GET['id']?>';">Back</button>
-    		</form>
+  <!-- Header/Home -->
+  <div class="container">
+    <h2>Submit Grades for Requirements of <?php
+      $class_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id'];
+      $class_result = mysqli_query($conn, $class_sql);
+      $row = mysqli_fetch_assoc($class_result);
+      echo $row['subject_code']." - ".$row['subject_name'];
+    ?></h2>
+    <a href='addreqrecord.php'><button id="add" class="btn w3-deep-orange">Add Requirement</button> </a>
+    <button id="back" class="btn w3-dark-gray" onClick="Javascript:window.location.href= 'classoptions.php?id=<?php echo $_GET['id'];?>';">Back</button>
+    <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Requirement Type</th>
+          <th>Requirement Name</th>
+          <th>Total Score</th>
+          <th>Student's Score</th>
+          <th>Edit</th>
+        </tr>
+      </thead>
+      <tbody>
+          <?php
+            $sql = "SELECT * FROM requirement JOIN requirement_record ON requirement.requirement_id = requirement_record.requirement_id JOIN student ON requirement_record.student_id = student.student_id WHERE subject_id = ".$_GET['id']." ORDER BY requirement_name DESC";
+            $result = mysqli_query($conn, $sql);
+            if ($result->num_rows  >  0) {
+              while($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>".$row['first_name']." ".$row['last_name']."</td>";
+                  echo "<td>".$row['requirement_type']."</td>";
+                  echo "<td>".$row['requirement_name']."</td>";
+                  echo "<td>".$row['total_score']."</td>";
+                  echo "<td>".$row['score']."</td>";
+                  echo "<td><a href='updatescore.php?requirement_id=".$row['requirement_id']."&student_id=".$row['student_id']."'>
+                       <button class='btn btn-warning'>
+                         <i class='fa fa-pencil' aria-hidden='true'></i>
+                       </button></a></td>";
+              }
+            } else {
+              echo "<tr>";
+              echo "<h3> No student has been recorded yet.</h3>";
+            }
+            echo "</tr>";
+          ?>
+      </tbody>
+    </table>
     </div>
-  </header>
+  </div>
 <!-- END PAGE CONTENT -->
 </div>
 </body>
 </html>
-<?php
-
-  if(isset($_POST['submit'])){
-
-    $conn = mysqli_connect('localhost','root','','classrecord1') or die("Could not connect to database");
-    // $sql = "INSERT INTO student (id_number,first_name,last_name,image) VALUES ('$idno','$first', '$last','$temp')";
-    $result = mysqli_query($conn,$sql);
-
-  }
-?>
