@@ -161,6 +161,26 @@
                 </div>
               </div>
             </div>
+            <div class="col-auto mb-3">
+              <div class="card" style="width: 24rem;">
+                <img class="card-img-top" src="resources/calculate.jpeg " alt="calc">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <a href=" " class="btn">Calculate Final Grades</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-auto mb-3">
+              <div class="card" style="width: 24rem;">
+                <img class="card-img-top" src="resources/editcalc.jpg " alt="test">
+                <div class="card-body">
+                  <!-- <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
+                  <a href=" " class="btn">Edit Grading System</a>
+                </div>
+              </div>
+            </div>
         </div>
         <a href="class.php"><button class="btn-danger btn-lg w3-center">Back</button></a>
       </div>

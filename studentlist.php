@@ -111,6 +111,7 @@
       echo $row['subject_code']." - ".$row['subject_name'];
     ?></h2>
     <a href='addstudentrecord.php?id=<?php echo $_GET['id']?>'><button id="add" class="btn w3-purple">Add Student</button></a>
+    <button id="back" class="btn w3-dark-gray" onClick="Javascript:window.location.href= 'classoptions.php?id=<?php echo $_GET['id'];?>';">Back</button>
     <div class="table-responsive">
     <table class="table">
       <thead>
