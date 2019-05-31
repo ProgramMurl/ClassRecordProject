@@ -7,14 +7,16 @@
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
   }
-  // if(!isset($_GET['id'])){
-  //   header('location: classoptions.php');
-  // }
 
-  // if(isset($_GET['student_id'])){
-  //   $delete_sql = "DELETE FROM student_record WHERE student_id = ".$_GET['student_id'];
-  //   mysqli_query($conn, $delete_sql);
-  // }
+  if(!isset($_GET['id'])){
+    header('location: classoptions.php');
+  }
+
+   if(isset($_GET['id']) && isset($_GET['requirement_id'])){
+     $delete_sql = "DELETE FROM requirement WHERE subject_id = ".$_GET['id']." AND requirement_id = ".$_GET['requirement_id'];
+     mysqli_query($conn, $delete_sql);
+     header("location: reqlist.php?id=".$_GET['id']);
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -101,54 +103,49 @@
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
-  <?php
-    // $sql = "SELECT * FROM requirement";
-    // $result = $conn->query($sql) or die($conn->error);
-  ?>
 
   <!-- Header/Home -->
   <div class="container">
     <h2>Requirements of <?php
-      // $class_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id'];
-      // $class_result = mysqli_query($conn, $class_sql);
-      // $row = mysqli_fetch_assoc($class_result);
-      // echo $row['subject_code']." - ".$row['subject_name'];
+      $class_sql = "SELECT * FROM subject WHERE subject_id = ".$_GET['id'];
+      $class_result = mysqli_query($conn, $class_sql);
+      $row = mysqli_fetch_assoc($class_result);
+      echo $row['subject_code']." - ".$row['subject_name'];
     ?></h2>
     <a href='addreqrecord.php'><button id="add" class="btn w3-deep-orange">Add Requirement</button> </a>
-    <button id="back" class="btn w3-dark-gray" onClick="Javascript:window.location.href= 'classoptions.php';">Back</button>
+    <button id="back" class="btn w3-dark-gray" onClick="Javascript:window.location.href= 'classoptions.php?id=<?php echo $_GET['id'];?>';">Back</button>
     <div class="table-responsive">
     <table class="table">
       <thead>
         <tr>
-          <th>Student ID</th>
+          <th>Requirement Type</th>
           <th>Requirement Name</th>
           <th>Total Score</th>
-          <th>Student Score</th>
           <th>Edit</th>
           <th>Delete</th>
         </tr>
       </thead>
       <tbody>
           <?php
-            // if ($result->num_rows  >  0) {
-            //   while($row = $result->fetch_assoc()) {
-            //       echo "<tr>";
-            //       echo "<td>".$row['requirement_type']."</td>";
-            //       echo "<td>".$row['requirement_name']."</td>";
-            //       echo "<td>".$row['requirement_description']."</td>";
-            //       echo "<td>".$row['total_score']."</td>";
-            //       echo "<td><a href='updatestudent.php?id=".$row['student_id']."'>
-            //            <button class='btn btn-warning' value=".$row['student_id'].">
-            //              <i class='fa fa-pencil' aria-hidden='true'></i>
-            //            </button></a></td>";
-            //       echo "<td><a href='delete_class.php?id=".$row['student_id']."'><button class='btn btn-danger'  value='".$row['student_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
-            //   }
-            // }
-            // else {
-            //     echo "<tr>";
-            //      echo "<h3> No student has been recorded yet.</h3>";
-            // }
-            // echo "</tr>";
+            $sql = "SELECT * FROM requirement WHERE subject_id = ".$_GET['id'];
+            $result = mysqli_query($conn, $sql);
+            if ($result->num_rows  >  0) {
+              while($row = $result->fetch_assoc()) {
+                  echo "<tr>";
+                  echo "<td>".$row['requirement_type']."</td>";
+                  echo "<td>".$row['requirement_name']."</td>";
+                  echo "<td>".$row['total_score']."</td>";
+                  echo "<td><a href='updaterequirement.php?id=".$row['requirement_id']."'>
+                       <button class='btn btn-warning' value=".$row['requirement_id'].">
+                         <i class='fa fa-pencil' aria-hidden='true'></i>
+                       </button></a></td>";
+                  echo "<td><a href='reqlist.php?id=".$_GET['id']."&requirement_id=".$row['requirement_id']."'><button class='btn btn-danger'  value='".$row['requirement_id']."'><i class='fa fa-trash-o' aria-hidden='true'></i></button></a></td>";
+              }
+            } else {
+              echo "<tr>";
+              echo "<h3> No student has been recorded yet.</h3>";
+            }
+            echo "</tr>";
           ?>
       </tbody>
     </table>

@@ -147,7 +147,7 @@
                 <div class="card-body">
                   <!-- <h5 class="card-title">Card title</h5>
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p> -->
-                  <a href="reqlist.php" class="btn">Requirements</a>
+                  <a href="reqlist.php?id=<?php echo $_GET['id'];?>" class="btn">Requirements</a>
                 </div>
               </div>
             </div>

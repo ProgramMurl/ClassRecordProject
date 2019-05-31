@@ -2,10 +2,33 @@
   include("config.php");
   session_start();
 
+  define('RESPONSE_1', 'Requirement successfully updated in the database!');
+  define('RESPONSE_2', 'Error updating the database, please contact the IT administrator.');
+
   if(!isset($_SESSION['active_user_id']) && !isset($_SESSION['active_user_username'])){
     session_unset();
     session_destroy(); // destroy any other existing sessions
     header("location: index.php"); // redirect users back to login page
+  }
+
+  if(isset($_POST['requirement_type']) && isset($_POST['requirement_name']) && isset($_POST['requirement_description']) && isset($_POST['total_score'])){
+    $update_sql = "UPDATE requirement SET requirement_type = '".$_POST['requirement_type']."', requirement_name = '".$_POST['requirement_name']."', requirement_description='".$_POST['requirement_description']."', total_score = ".$_POST['total_score']." WHERE requirement_id = ".$_GET['id'];
+    $result = mysqli_query($conn, $update_sql);
+    if($result){
+        $_SESSION['response_msg'] = RESPONSE_1;
+    }else{
+        $_SESSION['response_msg'] = RESPONSE_1;
+    }
+  }
+
+  if(!isset($_GET['id'])){
+    header("location: class.php");
+  }else{
+    $query_sql = "SELECT * FROM requirement WHERE requirement_id = ".$_GET['id'];
+    $result = mysqli_query($conn, $query_sql);
+    if($result){
+      $row = mysqli_fetch_assoc($result);
+    }
   }
 ?>
 <!DOCTYPE html>
@@ -101,36 +124,27 @@
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3-black">
      <div class="relative fullwidth col-xs-12">
-      	<form action="updaterequirement.php" method="post">
+      	<form action="updaterequirement.php?id=<?php echo $_GET['id'];?>" method="post">
           <fieldset>
       		 <legend><h4>Update Requirement</h4></legend>
            <label>Select the category</label>
-            <select name="Select[]" >
-              <option value="quiz">Quiz</option>
-              <option value="exam">Exam</option>
-              <option value="ass">Assignment</option>
-              </select><br><br>
-              <div class="w3-center"> Student ID number  <input type="text" name="idnum" required="required" placeholder="Student ID number"> </div>
-              <div class="w3-center"> Requirement Number  <input type="text" name="rnum" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3"> </div>
-              <div class="w3-center"> Student's Score <input type="text" name="upscore" required="required" placeholder="Updated Score"></div>
+            <select name="requirement_type" >
+              <option value="quiz" <?php echo $row['requirement_type'] == "quiz"? "selected": "";?>>Quiz</option>
+              <option value="exam" <?php echo $row['requirement_type'] == "exam"? "selected": "";?>>Exam</option>
+              <option value="assignment" <?php echo $row['requirement_type'] == "assignment"? "selected": "";?>>Assignment</option>
+            </select><br><br>
+            <div class="w3-center"> Requirement Name  <input type="text" name="requirement_name" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3" value="<?php echo $row['requirement_name'];?>"> </div>
+            <div class="w3-center"> Requirement Description  <input type="text" name="requirement_description" required="required" placeholder="e.g Exam 1, Quiz 2, Assignment 3" value="<?php echo $row['requirement_description'];?>"> </div>
+            <div class="w3-center"> Total Score <input type="text" name="total_score" required="required" placeholder="Updated Score" value="<?php echo $row['total_score'];?>"></div>
+            <p class="text-center"><?php echo(isset($_SESSION['response_msg']) ? $_SESSION['response_msg'] : "");?></p>
           </fieldset> <br>
       		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
-      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'class.php';">Back</button>
+      		<button type="button" id="back" name="back" class="w3-button w3-round-xlarge form-btn semibold" onClick="Javascript:window.location.href= 'reqlist.php?id=<?php echo $row['subject_id']?>';">Back</button>
     		</form>
     </div>
   </header>
 <!-- END PAGE CONTENT -->
 </div>
-
-
 </body>
 </html>
-
-
-<?php
-//	include("config.php");
-//	session_start();
-
-
-
-?>
+<?php unset($_SESSION['response_msg']);?>
