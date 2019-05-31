@@ -21,49 +21,54 @@
     $quiz_weight = $weights['quiz_weight'];
     $assignment_weight = $weights['assignment_weight'];
 
-    $exam_score = 0;
-    $quiz_score = 0;
-    $assignment_score = 0;
-    $grades_sql = "SELECT *, SUM(grade) / COUNT(grade) AS ave FROM student_record JOIN requirement_record ON student_record.student_id = requirement_record.student_id JOIN requirement ON requirement_record.requirement_id = requirement.requirement_id WHERE requirement.subject_id = ".$_GET['id']." GROUP BY requirement_record.student_id, requirement.requirement_type";
-    $grades_result = mysqli_query($conn, $grades_sql);
-    $row = mysqli_fetch_assoc($grades_result);
+    $exam_ave = 0;
+    $quiz_ave = 0;
+    $assignment_ave = 0;
 
-    $student_id = $row['student_id'];
-    do{
-      if($row['student_id'] == $student_id){
-        if($row['requirement_type'] == "exam"){
-          $exam_score = $row['ave'];
-        }else if($row['requirement_type'] == "exam"){
-          $quiz_score = $row['ave'];
-        }else if($row['requirement_type'] == "assignment"){
-          $assignment_score = $row['ave'];
-        }
-      }else{
-        $final_score = ($exam_weight * $exam_score) + ($quiz_weight * $quiz_score) + ($assignment_weight * $assignment_score);
-        $final_grade = (($final_score * 4) - 5) * -1;
+    $students = array();
 
-        $update_sql = "UPDATE student_record SET final_grade = ".$final_grade." WHERE student_id = ".$student_id;
-        mysqli_query($conn, $update_sql);
+    $students_sql = "SELECT student_id FROM student_record WHERE subject_id = ".$_GET['id'];
+    $result = mysqli_query($conn, $students_sql);
 
-        $student_id = $row['student_id'];
+    while($row = mysqli_fetch_assoc($result)){
+      array_push($students, $row['student_id']);
+    }
 
-        $exam_score = $quiz_score = $assignment_score = 0;
+    for($i = 0; $i < count($students); $i++){
+      $exam_sql = "SELECT student_id, AVG(grade) as ave FROM requirement_record JOIN requirement ON requirement_record.requirement_id = requirement.requirement_id WHERE student_id = ".$students[$i]." AND requirement_type = 'exam'";
+      $exam_result = mysqli_query($conn, $exam_sql);
 
-        if($row['requirement_type'] == "exam"){
-          $exam_score = $row['ave'];
-        }else if($row['requirement_type'] == "exam"){
-          $quiz_score = $row['ave'];
-        }else if($row['requirement_type'] == "assignment"){
-          $assignment_score = $row['ave'];
-        }
+      if(mysqli_num_rows($exam_result) > 0){
+        $exam_row = mysqli_fetch_assoc($exam_result);
+        $exam_ave = $exam_row['ave'];
       }
-    }while($row = mysqli_fetch_assoc($grades_result));
 
-    $final_score = ($exam_weight * $exam_score) + ($quiz_weight * $quiz_score) + ($assignment_weight * $assignment_score);
-    $final_grade = (($final_score * 4) - 5) * -1;
+      $quiz_sql = "SELECT student_id, AVG(grade) as ave FROM requirement_record JOIN requirement ON requirement_record.requirement_id = requirement.requirement_id WHERE student_id = ".$students[$i]." AND requirement_type = 'quiz'";
+      $quiz_result = mysqli_query($conn, $quiz_sql);
 
-    $update_sql = "UPDATE student_record SET final_grade = ".$final_grade." WHERE student_id = ".$student_id;
-    mysqli_query($conn, $update_sql);
+      if(mysqli_num_rows($quiz_result) > 0){
+        $quiz_row = mysqli_fetch_assoc($quiz_result);
+        $quiz_ave = $quiz_row['ave'];
+      }
+
+      $assignment_sql = "SELECT student_id, AVG(grade) as ave FROM requirement_record JOIN requirement ON requirement_record.requirement_id = requirement.requirement_id WHERE student_id = ".$students[$i]." AND requirement_type = 'assignment'";
+      $assignment_result = mysqli_query($conn, $assignment_sql);
+
+      if(mysqli_num_rows($assignment_result) > 0){
+        $assignment_row = mysqli_fetch_assoc($assignment_result);
+        $assignment_ave = $assignment_row['ave'];
+      }
+
+      $exam_score = $exam_weight * $exam_ave;
+      $quiz_score = $quiz_weight * $quiz_ave;
+      $assignment_score = $assignment_weight * $assignment_ave;
+
+      $final_score = $exam_score + $quiz_score + $assignment_score;
+      $final_grade = (($final_score * 4) - 5) * -1;
+
+      $final_sql = "UPDATE student_record SET final_grade = ".$final_grade." WHERE student_id = ".$students[$i];
+      mysqli_query($conn, $final_sql);
+    }
     header("location: viewcomputedgrades.php?id=".$_GET['id']);
   }
 ?>
