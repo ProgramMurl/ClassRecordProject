@@ -123,7 +123,7 @@
       $row = mysqli_fetch_assoc($class_result);
       echo $row['subject_code']." - ".$row['subject_name'];
     ?></h2>
-    <a href='addreqrecord.php'><button id="add" class="btn w3-deep-orange">Add Requirement</button> </a>
+    <a href='addreqrecord.php?id=<?php echo $_GET['id']?>'><button id="add" class="btn w3-deep-orange">Add Requirement</button> </a>
     <button id="back" class="btn w3-dark-gray" onClick="Javascript:window.location.href= 'classoptions.php?id=<?php echo $_GET['id'];?>';">Back</button>
     <div class="table-responsive">
     <table class="table">
