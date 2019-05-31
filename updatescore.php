@@ -12,7 +12,7 @@
   }
 
   if(isset($_POST['requirement_id']) && isset($_POST['student_id']) && isset($_POST['score'])){
-    $update_sql = "UPDATE requirement_record SET score = ".$_POST['score']." WHERE requirement_id = ".$_POST['requirement_id']." AND student_id = ".$_POST['student_id'];
+    $update_sql = "UPDATE requirement_record SET score = ".$_POST['score'].", grade = ".($_POST['score'] / $_POST['total_score'])." WHERE requirement_id = ".$_POST['requirement_id']." AND student_id = ".$_POST['student_id'];
     $result = mysqli_query($conn, $update_sql);
     if($result){
         $_SESSION['response_msg'] = RESPONSE_1;
@@ -132,6 +132,7 @@
            <div class="w3-center"> Requirement Name  <input type="text" name="requirement_name" value="<?php echo $row['requirement_name'];?>" disabled> </div>
            <input type="hidden" name="requirement_id" value="<?php echo $_GET['requirement_id']?>">
            <div class="w3-center"> Score  <input type="text" name="score" required="required" value="<?php echo $row['score'];?>"> </div>
+           <input type="hidden" name="total_score" value="<?php echo $row['total_score']?>">
            <p class="text-center"><?php echo(isset($_SESSION['response_msg']) ? $_SESSION['response_msg'] : "");?></p>
           </fieldset> <br>
       		<input class="submit w3-button w3-round-xlarge form-btn semibold" name="submit" type="submit" value="Submit">
