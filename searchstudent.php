@@ -100,7 +100,7 @@
     <a href="index.php" class="w3-bar-item w3-button"style="width:25% !important">
     LOGOUT</a>
   </div>
-</div>
+</div> 
 
 <!-- Page Content -->
 <div class="w3-padding-large" id="main">
